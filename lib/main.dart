@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wareef/Pages/Detail.dart';
 import 'package:wareef/Pages/HomePage.dart';
 import 'package:wareef/Pages/IntroPage.dart';
 import 'package:wareef/auth/Register.dart';
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         scaffoldBackgroundColor: Color(0x00020206),
       ),
-      home: HomePage(),
+      home: Detail(),
       routes: {
         "/home": (_) => HomePage(),
         "/login": (_) => Login(),
