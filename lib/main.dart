@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:wareef/Pages/Detail.dart';
 import 'package:wareef/Pages/HomePage.dart';
 import 'package:wareef/Pages/IntroPage.dart';
+import 'package:wareef/Pages/addTask.dart';
+import 'package:wareef/Pages/editTask.dart';
 import 'package:wareef/auth/Register.dart';
 import 'package:wareef/auth/login.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -24,7 +26,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         scaffoldBackgroundColor: Color(0x00020206),
       ),
-      home: Detail(),
+      home: addTask(),
       routes: {
         "/home": (_) => HomePage(),
         "/login": (_) => Login(),

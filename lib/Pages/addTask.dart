@@ -1,8 +1,7 @@
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
+import 'package:wareef/widgets/date_choice.dart';
 
 class addTask extends StatefulWidget {
   const addTask({super.key});
@@ -12,231 +11,236 @@ class addTask extends StatefulWidget {
 }
 
 class _addTaskState extends State<addTask> {
-
-
   @override
   Widget build(BuildContext context) {
-
-    return  Scaffold(
-
-      body:
-      SingleChildScrollView(
-        child: Container(
-          padding:EdgeInsets.only(top: 45,left: 8),
-
-          child:Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  IconButton(
-                    icon: Icon(Icons.arrow_back, color: Color(0xFF028960),),
-                    onPressed: () {
-                      // Navigator.pop(context);
-                    },
-                  ),
-                  SizedBox(width: 90), // Espacement entre l'icône et le texte
-                  Text(
-                    'Ajouter Une Nouvelle Tache',
-                    style: TextStyle(
-                      color: Color(0xFFFFFFFF),
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
+    return Scaffold(
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Container(
+            child: Column(
+              children: [
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height,
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 15,
+                    ),
+                    // child: Form(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            GestureDetector(
+                              onTap: () {},
+                              child: Image.asset(
+                                "images/Group 21.png",
+                              ),
+                            ),
+                            Text(
+                              "Ajouter une nouvelle tâche",
+                              style: TextStyle(
+                                fontSize: 25,
+                                color: Colors.white,
+                              ),
+                            ),
+                            Container(),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 130,
+                        ),
+                        Container(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                width: double.infinity,
+                                // height: 60,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8),
+                                  color: Color.fromARGB(255, 31, 31, 31),
+                                ),
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: 15,
+                                  vertical: 3,
+                                ),
+                                child: TextFormField(
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 16,
+                                  ),
+                                  decoration: InputDecoration(
+                                    contentPadding: EdgeInsets.symmetric(
+                                      vertical: 5,
+                                    ),
+                                    label: Text(
+                                      "Nom tâche",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                    focusedBorder: UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: Color.fromARGB(255, 31, 31, 31),
+                                      ),
+                                    ),
+                                    enabledBorder: UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: Color.fromARGB(255, 31, 31, 31),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(height: 20),
+                        Container(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                width: double.infinity,
+                                height: 160,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8),
+                                  color: Color.fromARGB(255, 31, 31, 31),
+                                ),
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: 15,
+                                  vertical: 3,
+                                ),
+                                child: TextFormField(
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 16,
+                                  ),
+                                  decoration: InputDecoration(
+                                    contentPadding: EdgeInsets.symmetric(
+                                      vertical: 5,
+                                    ),
+                                    label: Text(
+                                      "Description",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                    focusedBorder: UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: Color.fromARGB(255, 31, 31, 31),
+                                      ),
+                                    ),
+                                    enabledBorder: UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: Color.fromARGB(255, 31, 31, 31),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(height: 36),
+                        Row(
+                          children: [
+                            Column(
+                              children: [
+                                //debut
+                                Text(
+                                  'Date Debut',
+                                  style: TextStyle(
+                                    color: Color(0xFFFFFFFF),
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Container(
+                                  width: 180,
+                                  height: 50,
+                                  decoration: BoxDecoration(
+                                    color: Color.fromARGB(255, 30, 30, 30),
+                                    borderRadius: const BorderRadius.all(
+                                      Radius.circular(8.0),
+                                    ),
+                                  ),
+                                  child: DateChoice(height: MediaQuery.of(context).size.height-350),
+                                )
+                              ],
+                            ),
+                            Spacer(),
+                            //  SizedBox(width: 100,),
+                            Column(
+                              children: [
+                                //fin
+                                Text(
+                                  'Date Fin',
+                                  style: TextStyle(
+                                    color: Color(0xFFFFFFFF),
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Container(
+                                  width: 180,
+                                  height: 50,
+                                  decoration: BoxDecoration(
+                                    color: Color.fromARGB(255, 30, 30, 30),
+                                    borderRadius: const BorderRadius.all(
+                                      Radius.circular(8.0),
+                                    ),
+                                  ),
+                                  child: DateChoice(height: MediaQuery.of(context).size.height-350),
+                                )],
+                            )
+                          ],
+                        ),
+                        SizedBox(height: 60),
+                        GestureDetector(
+                          onTap: () {},
+                          child: Container(
+                            width: double.infinity,
+                            // height: 60,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8),
+                              color: Color.fromARGB(255, 2, 137, 96),
+                            ),
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 15,
+                              vertical: 16,
+                            ),
+                            child: Text(
+                              "Ajouter nouvelle tâche",
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.white,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                ],
-              ),
-              SizedBox(height: 60,),
-              Padding(
-               padding: EdgeInsets.all(0.0),
-                child:
-                Form(
-                  child:
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Nom Tache',
-                        style: TextStyle(
-                          color: Color(0xFFFFFFFF),
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      SizedBox(height: 8),
-
-                      TextFormField(
-                        decoration: InputDecoration(
-                          labelStyle: TextStyle(
-                            color: Color(0xFFFFFFFF),
-                          ),
-                         // labelText: 'Nomm' ,
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8.0)
-                          ),
-                          filled: true, // Permet de remplir le fond du champ
-                          fillColor: Color(0xFF1F1F1F),
-                        ),
-
-                      ),
-                      SizedBox(height: 16),
-                      Text(
-                        'Description',
-                        style: TextStyle(
-                          color: Color(0xFFFFFFFF),
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      SizedBox(height: 8),
-                      TextFormField(
-                        decoration: InputDecoration(
-                          labelStyle: TextStyle(
-                            color: Color(0xFFFFFFFF),
-                          ),
-                          //labelText: 'Description',
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8.0)
-                          ),
-                          filled: true, // Permet de remplir le fond du champ
-                          fillColor: Color(0xFF1F1F1F),
-                        ),
-                        minLines: 4,
-                        keyboardType: TextInputType.multiline,
-                        maxLines: null,
-                      ),
-
-                      SizedBox(height: 36),
-
-                      Row(
-
-                        children: [
-                        Column(children: [
-                          //debut
-                          Text(
-                            'Date Debut',
-                            style: TextStyle(
-                              color: Color(0xFFFFFFFF),
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          SizedBox(height:10,),
-                          Container(
-                            width: 180,
-                            height: 50,
-                            decoration: BoxDecoration(
-                              color: Color.fromARGB(255, 30, 30, 30),
-                              borderRadius: const BorderRadius.all(
-                                Radius.circular(8.0),
-                              ),
-
-                            ),
-                            child:  Row(
-                              children: [
-                                IconButton(
-                                  icon: Icon(Icons.calendar_today,color:  Color(0xFFFFFFFF),),
-                                  onPressed: () { //issakha ta logique ici
-                                  },
-                                ),
-                                Text(
-                                  '12-03-2024',
-                                  style: TextStyle(
-                                    color: Color(0xFFFFFFFF),
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ],
-                            )
-                          )
-                        ],
-                        ),
-                      Spacer(),
-                      //  SizedBox(width: 100,),
-                        Column(children: [
-
-                          //fin
-                          Text(
-                            'Date Fin',
-                            style: TextStyle(
-                              color: Color(0xFFFFFFFF),
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          SizedBox(height:10,),
-                          Container(
-                            width: 180,
-                            height: 50,
-                            decoration: BoxDecoration(
-                              color: Color.fromARGB(255, 30, 30, 30),
-                              borderRadius: const BorderRadius.all(
-                                Radius.circular(8.0),
-                              ),
-
-                            ),
-                            child: Row(
-                              children: [
-                                IconButton(
-                                  icon: Icon(Icons.calendar_today,color: Color(0xFFFFFFFF),),
-                                  onPressed: () { //issakha ta logique ici
-                                  },
-                                ),
-                                Text(
-                                  '12-03-2024',
-                                  style: TextStyle(
-                                    color: Color(0xFFFFFFFF),
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ],
-                            )
-                          )
-                        ],)
-                      ],),
-
-                      SizedBox(height:60),
-                      SizedBox(
-                        width: double.infinity,
-                        child: Container(
-                          decoration: BoxDecoration(
-
-                            borderRadius: const BorderRadius.all(
-                              Radius.circular(8.0),
-                            ),
-
-                          ),
-                          child: ElevatedButton(
-                            onPressed: () {
-
-                            },
-                            style: ButtonStyle(
-                              backgroundColor: MaterialStateProperty.all<Color>(
-                                Color(0xFF028960),
-                              ),
-                            ),
-                            child:  Text(
-                              'Ajouter',
-                              style: TextStyle(
-                                color: Color(0xFFFFFFFF),
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
                 ),
-              )
-              ,
-            ],)
-          ,),
-      ) ,
+              ],
+            ),
+          ),
+        ),
+      ),
     );
-
   }
 }
