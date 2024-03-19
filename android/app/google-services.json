@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "680922148221",
+    "project_id": "wareef-388f3",
+    "storage_bucket": "wareef-388f3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:680922148221:android:8d7b8ce25e6dfb3c4c7014",
+        "android_client_info": {
+          "package_name": "com.example.wareef"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCkrJhkwXAUCNeQWsFONWrpkrJphvuoQak"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

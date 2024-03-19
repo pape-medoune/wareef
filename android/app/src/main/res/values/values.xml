@@ -1,0 +1,20 @@
+<!-- <resources>
+    <string name="google_app_id">YOUR_APP_ID</string>
+    <string name="gcm_defaultSenderId">YOUR_SENDER_ID</string>
+    <string name="default_web_client_id">YOUR_WEB_CLIENT_ID</string>
+    <string name="ga_trackingId">YOUR_TRACKING_ID</string>
+    <string name="firebase_database_url">YOUR_DATABASE_URL</string>
+    <string name="google_api_key">YOUR_API_KEY</string>
+    <string name="google_crash_reporting_api_key">YOUR_CRASH_REPORTING_API_KEY</string>
+    <string name="project_id">YOUR_PROJECT_ID</string>
+</resources> -->
+<resources>
+    <string name="google_app_id">1:680922148221:android:8d7b8ce25e6dfb3c4c7014</string>
+    <string name="gcm_defaultSenderId">680922148221</string>
+    <string name="default_web_client_id">1:680922148221:web:8d7b8ce25e6dfb3c4c7014</string>
+    <string name="ga_trackingId">UA-XXXXXXXXX-X</string> <!-- Remplacez "UA-XXXXXXXXX-X" par votre ID de suivi Google Analytics -->
+    <string name="firebase_database_url">https://wareef-388f3.firebaseio.com</string> <!-- URL de la base de données Firebase -->
+    <string name="google_api_key">AIzaSyCkrJhkwXAUCNeQWsFONWrpkrJphvuoQak</string>
+    <string name="google_crash_reporting_api_key">AIzaSyCkrJhkwXAUCNeQWsFONWrpkrJphvuoQak</string>
+    <string name="project_id">wareef-388f3</string>
+</resources>
