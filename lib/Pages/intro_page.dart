@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:wareef/components/SplashScreenGame.dart';
+import 'package:wareef/components/splash_screen_game.dart';
 
 class IntroPage extends StatefulWidget {
-  const IntroPage({Key? key}) : super(key: key);
+  const IntroPage({super.key});
 
   @override
   _IntroPageState createState() => _IntroPageState();
@@ -11,7 +11,7 @@ class IntroPage extends StatefulWidget {
 class _IntroPageState extends State<IntroPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: SplashScreenGame(),
     );
   }
