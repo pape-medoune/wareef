@@ -1,11 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
-import 'package:wareef/components/MiniCard.dart';
+import 'package:wareef/Pages/add_task.dart';
+import 'package:wareef/components/mini_card.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({super.key});
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -15,16 +14,28 @@ class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
   @override
   late final controller = SlidableController(this);
+  @override
   Widget build(BuildContext context) {
-    int _currentIndex = 0;
+    int currentIndex = 0;
     return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          'Samay SAS',
+          style: TextStyle(
+            fontSize: 30
+          ),
+        ),
+        centerTitle: true,
+        backgroundColor: const Color.fromARGB(255, 186, 131, 222),
+        elevation: 1,
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
-          child: Container(
+          child: SizedBox(
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
             child: Padding(
-              padding: EdgeInsets.symmetric(
+              padding: const EdgeInsets.symmetric(
                 horizontal: 20,
               ),
               child: Column(
@@ -33,7 +44,7 @@ class _HomePageState extends State<HomePage>
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Column(
+                      const Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
@@ -67,13 +78,13 @@ class _HomePageState extends State<HomePage>
                       Container(
                         width: MediaQuery.of(context).size.width - 40,
                         decoration: BoxDecoration(
-                          color: Color.fromARGB(255, 30, 30, 30),
+                          color: const Color.fromARGB(255, 30, 30, 30),
                           borderRadius: const BorderRadius.all(
                             Radius.circular(12.0),
                           ),
                           border: Border.all(
                             width: 1.0,
-                            color: Color.fromARGB(255, 30, 30, 30),
+                            color: const Color.fromARGB(255, 30, 30, 30),
                           ),
                         ),
                         child: Row(
@@ -112,7 +123,7 @@ class _HomePageState extends State<HomePage>
                   const SizedBox(
                     height: 20,
                   ),
-                  Container(
+                  SizedBox(
                     width: double.infinity,
                     // decoration: BoxDecoration(color:Colors.deepPurple,),
                     height: MediaQuery.of(context).size.height - 200,
@@ -121,7 +132,7 @@ class _HomePageState extends State<HomePage>
                       children: [
                         Column(
                           children: [
-                            Row(
+                            const Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
@@ -146,27 +157,27 @@ class _HomePageState extends State<HomePage>
                             ),
                             Container(
                               decoration: BoxDecoration(
-                                  color: Color.fromARGB(255, 24, 24, 24),
+                                  color: const Color.fromARGB(255, 24, 24, 24),
                                   borderRadius: BorderRadius.circular(8.0)),
                               child: Padding(
-                                padding: EdgeInsets.all(10.0),
+                                padding: const EdgeInsets.all(10.0),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(
+                                    const Text(
                                       "Daily task",
                                       style: TextStyle(
                                           fontSize: 18, color: Colors.white),
                                     ),
-                                    Text(
+                                    const Text(
                                       "2/3 task completed",
                                       style: TextStyle(
                                         fontSize: 16,
-                                        color: const Color.fromARGB(
-                                            186, 255, 255, 255),
+                                        color:
+                                            Color.fromARGB(186, 255, 255, 255),
                                       ),
                                     ),
-                                    Row(
+                                    const Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       crossAxisAlignment:
@@ -176,7 +187,7 @@ class _HomePageState extends State<HomePage>
                                           "You are almost done go ahead",
                                           style: TextStyle(
                                             fontSize: 14,
-                                            color: const Color.fromARGB(
+                                            color: Color.fromARGB(
                                                 186, 255, 255, 255),
                                           ),
                                         ),
@@ -198,8 +209,8 @@ class _HomePageState extends State<HomePage>
                                               100,
                                       height: 18,
                                       decoration: BoxDecoration(
-                                        color:
-                                            Color.fromARGB(255, 186, 131, 222),
+                                        color: const Color.fromARGB(
+                                            255, 186, 131, 222),
                                         borderRadius: BorderRadius.circular(
                                           8.0,
                                         ),
@@ -212,7 +223,7 @@ class _HomePageState extends State<HomePage>
                             const SizedBox(
                               height: 20,
                             ),
-                            Row(
+                            const Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
@@ -263,7 +274,8 @@ class _HomePageState extends State<HomePage>
                                       children: [
                                         SlidableAction(
                                           onPressed: (BuildContext context) {},
-                                          backgroundColor: Color(0xFF21B7CA),
+                                          backgroundColor:
+                                              const Color(0xFF21B7CA),
                                           foregroundColor: Colors.white,
                                           icon: Icons.remove_red_eye,
                                           label: 'Detail',
@@ -278,7 +290,8 @@ class _HomePageState extends State<HomePage>
                                         ),
                                         SlidableAction(
                                           onPressed: (BuildContext context) {},
-                                          backgroundColor: Color(0xFFFE4A49),
+                                          backgroundColor:
+                                              const Color(0xFFFE4A49),
                                           foregroundColor: Colors.white,
                                           icon: Icons.delete,
                                           label: 'Supprimer',
@@ -288,7 +301,7 @@ class _HomePageState extends State<HomePage>
 
                                     // The child of the Slidable is what the user sees when the
                                     // component is not dragged.
-                                    child: MiniCard(
+                                    child: const MiniCard(
                                         title: "Examen ",
                                         subtitle: "15 Mai",
                                         select: true)),
@@ -297,28 +310,27 @@ class _HomePageState extends State<HomePage>
                             const SizedBox(
                               height: 15,
                             ),
-                            Column(
+                            const Column(
                               children: [
                                 MiniCard(
                                   title: "Devoir ",
                                   subtitle: "5 Mai",
                                   select: false,
                                 ),
-                                const SizedBox(
-                              height: 15,
-                            ),
-                            MiniCard(
+                                SizedBox(
+                                  height: 15,
+                                ),
+                                MiniCard(
                                   title: "Apprendre Leçon ",
                                   subtitle: "17 Mars",
                                   select: true,
                                 ),
                               ],
                             ),
-                            
                             const SizedBox(
                               height: 20,
                             ),
-                            Row(
+                            const Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
@@ -341,7 +353,6 @@ class _HomePageState extends State<HomePage>
                             const SizedBox(
                               height: 15,
                             ),
-                            
                           ],
                         ),
                       ],
@@ -354,56 +365,62 @@ class _HomePageState extends State<HomePage>
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(context, MaterialPageRoute(
+            builder: (context) {
+              return const AddTask();
+            },
+          ));
+        },
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(
             30,
           ),
         ),
-        backgroundColor: Color.fromARGB(255, 186, 131, 222),
-        child: Icon(
+        backgroundColor: const Color.fromARGB(255, 186, 131, 222),
+        child: const Icon(
           Icons.add,
           size: 30,
         ),
       ),
-    //   bottomNavigationBar: SalomonBottomBar(
-    //     itemPadding: EdgeInsets.symmetric(
-    //       horizontal: 15,
-    //       vertical: 15,
-    //     ),
-    //     backgroundColor: Colors.white,
-    //     currentIndex: _currentIndex,
-    //     onTap: (i) => setState(() => _currentIndex = i),
-    //     items: [
-    //       /// Home
-    //       SalomonBottomBarItem(
-    //         icon: Icon(Icons.home),
-    //         title: Text("Accueil"),
-    //         selectedColor: Colors.purple,
-    //       ),
+      //   bottomNavigationBar: SalomonBottomBar(
+      //     itemPadding: EdgeInsets.symmetric(
+      //       horizontal: 15,
+      //       vertical: 15,
+      //     ),
+      //     backgroundColor: Colors.white,
+      //     currentIndex: _currentIndex,
+      //     onTap: (i) => setState(() => _currentIndex = i),
+      //     items: [
+      //       /// Home
+      //       SalomonBottomBarItem(
+      //         icon: Icon(Icons.home),
+      //         title: Text("Accueil"),
+      //         selectedColor: Colors.purple,
+      //       ),
 
-    //       /// Likes
-    //       SalomonBottomBarItem(
-    //         icon: Icon(Icons.task),
-    //         title: Text("Tâches"),
-    //         selectedColor: Colors.pink,
-    //       ),
+      //       /// Likes
+      //       SalomonBottomBarItem(
+      //         icon: Icon(Icons.task),
+      //         title: Text("Tâches"),
+      //         selectedColor: Colors.pink,
+      //       ),
 
-    //       /// Profile
-    //       SalomonBottomBarItem(
-    //         icon: Icon(Icons.person),
-    //         title: Text("Profile"),
-    //         selectedColor: Colors.teal,
-    //       ),
+      //       /// Profile
+      //       SalomonBottomBarItem(
+      //         icon: Icon(Icons.person),
+      //         title: Text("Profile"),
+      //         selectedColor: Colors.teal,
+      //       ),
 
-    //       /// Search
-    //       SalomonBottomBarItem(
-    //         icon: Icon(Icons.info),
-    //         title: Text("A propos"),
-    //         selectedColor: Colors.orange,
-    //       ),
-    //     ],
-    //   ),
+      //       /// Search
+      //       SalomonBottomBarItem(
+      //         icon: Icon(Icons.info),
+      //         title: Text("A propos"),
+      //         selectedColor: Colors.orange,
+      //       ),
+      //     ],
+      //   ),
     );
   }
 }

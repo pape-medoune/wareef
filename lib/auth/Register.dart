@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:wareef/auth/login.dart';
 
 class Register extends StatefulWidget {
-  const Register({Key? key}) : super(key: key);
+  const Register({super.key});
 
   @override
   _RegisterState createState() => _RegisterState();
@@ -15,7 +14,7 @@ class _RegisterState extends State<Register> {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Container(
-            padding: EdgeInsets.symmetric(
+            padding: const EdgeInsets.symmetric(
               horizontal: 15,
             ),
             width: MediaQuery.of(context).size.width,
@@ -24,7 +23,7 @@ class _RegisterState extends State<Register> {
                 const SizedBox(
                   height: 80,
                 ),
-                Text(
+                const Text(
                   "WAREËF",
                   style: TextStyle(
                     color: Colors.white,
@@ -34,7 +33,7 @@ class _RegisterState extends State<Register> {
                 const SizedBox(
                   height: 25,
                 ),
-                Container(
+                const SizedBox(
                   width: double.infinity,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -50,10 +49,10 @@ class _RegisterState extends State<Register> {
                         "Nouveau dans l'application? Inscrivez vous !",
                         style: TextStyle(
                           fontSize: 15,
-                          color: const Color.fromARGB(148, 255, 255, 255),
+                          color: Color.fromARGB(148, 255, 255, 255),
                         ),
                       ),
-                      const SizedBox(
+                      SizedBox(
                         height: 8,
                       ),
                     ],
@@ -71,18 +70,18 @@ class _RegisterState extends State<Register> {
                         // height: 60,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8),
-                          color:Color.fromARGB(255, 31, 31, 31),
+                          color: const Color.fromARGB(255, 31, 31, 31),
                         ),
-                        padding: EdgeInsets.symmetric(
+                        padding: const EdgeInsets.symmetric(
                           horizontal: 15,
                           vertical: 3,
                         ),
                         child: TextFormField(
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.white,
                             fontSize: 16,
                           ),
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             contentPadding: EdgeInsets.symmetric(
                               vertical: 5,
                             ),
@@ -95,12 +94,12 @@ class _RegisterState extends State<Register> {
                             ),
                             focusedBorder: UnderlineInputBorder(
                               borderSide: BorderSide(
-                                color:Color.fromARGB(255, 31, 31, 31),
+                                color: Color.fromARGB(255, 31, 31, 31),
                               ),
                             ),
                             enabledBorder: UnderlineInputBorder(
                               borderSide: BorderSide(
-                                color:Color.fromARGB(255, 31, 31, 31),
+                                color: Color.fromARGB(255, 31, 31, 31),
                               ),
                             ),
                           ),
@@ -121,18 +120,18 @@ class _RegisterState extends State<Register> {
                         // height: 60,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8),
-                          color:Color.fromARGB(255, 31, 31, 31),
+                          color: const Color.fromARGB(255, 31, 31, 31),
                         ),
-                        padding: EdgeInsets.symmetric(
+                        padding: const EdgeInsets.symmetric(
                           horizontal: 15,
                           vertical: 3,
                         ),
                         child: TextFormField(
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.white,
                             fontSize: 16,
                           ),
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             contentPadding: EdgeInsets.symmetric(
                               vertical: 5,
                             ),
@@ -145,12 +144,12 @@ class _RegisterState extends State<Register> {
                             ),
                             focusedBorder: UnderlineInputBorder(
                               borderSide: BorderSide(
-                               color: Color.fromARGB(255, 31, 31, 31),
+                                color: Color.fromARGB(255, 31, 31, 31),
                               ),
                             ),
                             enabledBorder: UnderlineInputBorder(
                               borderSide: BorderSide(
-                                color:Color.fromARGB(255, 31, 31, 31),
+                                color: Color.fromARGB(255, 31, 31, 31),
                               ),
                             ),
                           ),
@@ -171,18 +170,18 @@ class _RegisterState extends State<Register> {
                         // height: 60,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8),
-                          color:Color.fromARGB(255, 31, 31, 31),
+                          color: const Color.fromARGB(255, 31, 31, 31),
                         ),
-                        padding: EdgeInsets.symmetric(
+                        padding: const EdgeInsets.symmetric(
                           horizontal: 15,
                           vertical: 3,
                         ),
                         child: TextFormField(
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.white,
                             fontSize: 16,
                           ),
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             contentPadding: EdgeInsets.symmetric(
                               vertical: 5,
                             ),
@@ -195,12 +194,12 @@ class _RegisterState extends State<Register> {
                             ),
                             focusedBorder: UnderlineInputBorder(
                               borderSide: BorderSide(
-                               color: Color.fromARGB(255, 31, 31, 31),
+                                color: Color.fromARGB(255, 31, 31, 31),
                               ),
                             ),
                             enabledBorder: UnderlineInputBorder(
                               borderSide: BorderSide(
-                               color: Color.fromARGB(255, 31, 31, 31),
+                                color: Color.fromARGB(255, 31, 31, 31),
                               ),
                             ),
                           ),
@@ -221,19 +220,19 @@ class _RegisterState extends State<Register> {
                         // height: 60,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8),
-                          color:Color.fromARGB(255, 31, 31, 31),
+                          color: const Color.fromARGB(255, 31, 31, 31),
                         ),
-                        padding: EdgeInsets.symmetric(
+                        padding: const EdgeInsets.symmetric(
                           horizontal: 15,
                           vertical: 3,
                         ),
                         child: TextFormField(
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.white,
                             fontSize: 16,
                           ),
                           obscureText: true,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             contentPadding: EdgeInsets.symmetric(
                               vertical: 5,
                             ),
@@ -246,12 +245,12 @@ class _RegisterState extends State<Register> {
                             ),
                             focusedBorder: UnderlineInputBorder(
                               borderSide: BorderSide(
-                                color:Color.fromARGB(255, 31, 31, 31),
+                                color: Color.fromARGB(255, 31, 31, 31),
                               ),
                             ),
                             enabledBorder: UnderlineInputBorder(
                               borderSide: BorderSide(
-                                color:Color.fromARGB(255, 31, 31, 31),
+                                color: Color.fromARGB(255, 31, 31, 31),
                               ),
                             ),
                           ),
@@ -269,19 +268,19 @@ class _RegisterState extends State<Register> {
                               // height: 60,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8),
-                                color:Color.fromARGB(255, 31, 31, 31),
+                                color: const Color.fromARGB(255, 31, 31, 31),
                               ),
-                              padding: EdgeInsets.symmetric(
+                              padding: const EdgeInsets.symmetric(
                                 horizontal: 15,
                                 vertical: 3,
                               ),
                               child: TextFormField(
-                                style: TextStyle(
+                                style: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 16,
                                 ),
                                 obscureText: true,
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                   contentPadding: EdgeInsets.symmetric(
                                     vertical: 5,
                                   ),
@@ -299,7 +298,7 @@ class _RegisterState extends State<Register> {
                                   ),
                                   enabledBorder: UnderlineInputBorder(
                                     borderSide: BorderSide(
-                                     color: Color.fromARGB(255, 31, 31, 31),
+                                      color: Color.fromARGB(255, 31, 31, 31),
                                     ),
                                   ),
                                 ),
@@ -308,7 +307,7 @@ class _RegisterState extends State<Register> {
                             const SizedBox(
                               height: 15,
                             ),
-                            Container(
+                            const SizedBox(
                               width: double.infinity,
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
@@ -334,13 +333,13 @@ class _RegisterState extends State<Register> {
                                 // height: 60,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(8),
-                                  color: Color.fromARGB(255, 2, 137, 96),
+                                  color: const Color.fromARGB(255, 2, 137, 96),
                                 ),
-                                padding: EdgeInsets.symmetric(
+                                padding: const EdgeInsets.symmetric(
                                   horizontal: 15,
                                   vertical: 16,
                                 ),
-                                child: Text(
+                                child: const Text(
                                   "S'identifier",
                                   style: TextStyle(
                                     fontSize: 16,
@@ -360,11 +359,11 @@ class _RegisterState extends State<Register> {
                                 Container(
                                   width: 165,
                                   height: 1,
-                                  decoration: BoxDecoration(
+                                  decoration: const BoxDecoration(
                                     color: Colors.grey,
                                   ),
                                 ),
-                                Text(
+                                const Text(
                                   "Ou",
                                   style: TextStyle(
                                     fontSize: 18,
@@ -374,7 +373,7 @@ class _RegisterState extends State<Register> {
                                 Container(
                                   width: 165,
                                   height: 1,
-                                  decoration: BoxDecoration(
+                                  decoration: const BoxDecoration(
                                     color: Colors.grey,
                                   ),
                                 ),
@@ -386,7 +385,7 @@ class _RegisterState extends State<Register> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text(
+                                const Text(
                                   "Vous avez déjà un compte?",
                                   style: TextStyle(
                                     fontSize: 13,
@@ -400,7 +399,7 @@ class _RegisterState extends State<Register> {
                                   onTap: () {
                                     Navigator.pushNamed(context, "/login");
                                   },
-                                  child: Text(
+                                  child: const Text(
                                     "S'identifier",
                                     style: TextStyle(
                                       fontSize: 13,

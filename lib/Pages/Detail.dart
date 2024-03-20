@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Detail extends StatefulWidget {
-  const Detail({Key? key}) : super(key: key);
+  const Detail({super.key});
 
   @override
   _DetailState createState() => _DetailState();
@@ -13,11 +13,11 @@ class _DetailState extends State<Detail> {
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
-          child: Container(
+          child: SizedBox(
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
             child: Padding(
-              padding: EdgeInsets.symmetric(
+              padding: const EdgeInsets.symmetric(
                 horizontal: 15,
               ),
               child: Column(
@@ -32,7 +32,7 @@ class _DetailState extends State<Detail> {
                           "images/Group 21.png",
                         ),
                       ),
-                      Text(
+                      const Text(
                         "Detail (nom Tâche) ",
                         style: TextStyle(
                           fontSize: 25,
@@ -52,15 +52,15 @@ class _DetailState extends State<Detail> {
                         height: 100,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8),
-                          color: Color.fromARGB(255, 31, 31, 31),
+                          color: const Color.fromARGB(255, 31, 31, 31),
                         ),
-                        padding: EdgeInsets.symmetric(
+                        padding: const EdgeInsets.symmetric(
                           horizontal: 15,
                           vertical: 6,
                         ),
                         child: Column(
                           children: [
-                            Row(
+                            const Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
@@ -79,22 +79,22 @@ class _DetailState extends State<Detail> {
                               ],
                             ),
                             Container(
-                              margin: EdgeInsets.only(
+                              margin: const EdgeInsets.only(
                                 top: 3,
                               ),
                               width: double.infinity,
                               height: 1,
-                              decoration: BoxDecoration(
+                              decoration: const BoxDecoration(
                                 color: Color.fromARGB(74, 255, 255, 255),
                               ),
                             ),
-                            Text(
+                            const Text(
                               "azertyuio",
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white,
-                              ), 
+                              ),
                             ),
                           ],
                         ),
@@ -107,15 +107,15 @@ class _DetailState extends State<Detail> {
                         height: 150,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8),
-                          color: Color.fromARGB(255, 31, 31, 31),
+                          color: const Color.fromARGB(255, 31, 31, 31),
                         ),
-                        padding: EdgeInsets.symmetric(
+                        padding: const EdgeInsets.symmetric(
                           horizontal: 15,
                           vertical: 6,
                         ),
                         child: Column(
                           children: [
-                            Row(
+                            const Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
@@ -134,12 +134,12 @@ class _DetailState extends State<Detail> {
                               ],
                             ),
                             Container(
-                              margin: EdgeInsets.only(
+                              margin: const EdgeInsets.only(
                                 top: 3,
                               ),
                               width: double.infinity,
                               height: 1,
-                              decoration: BoxDecoration(
+                              decoration: const BoxDecoration(
                                 color: Color.fromARGB(74, 255, 255, 255),
                               ),
                             ),
@@ -151,7 +151,7 @@ class _DetailState extends State<Detail> {
                       ),
                       Row(
                         children: [
-                          Text(
+                          const Text(
                             "Statut:",
                             style: TextStyle(
                               fontSize: 16,
@@ -163,7 +163,7 @@ class _DetailState extends State<Detail> {
                             width: 4,
                           ),
                           Container(
-                            padding: EdgeInsets.symmetric(
+                            padding: const EdgeInsets.symmetric(
                               horizontal: 5,
                             ),
                             decoration: BoxDecoration(
@@ -172,7 +172,7 @@ class _DetailState extends State<Detail> {
                                 20,
                               ),
                             ),
-                            child: Text(
+                            child: const Text(
                               "Terminé",
                               style: TextStyle(
                                 fontSize: 16,
@@ -185,7 +185,7 @@ class _DetailState extends State<Detail> {
                       const SizedBox(
                         height: 20,
                       ),
-                      Container(
+                      SizedBox(
                         width: double.infinity,
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -196,15 +196,15 @@ class _DetailState extends State<Detail> {
                               height: 80,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8),
-                                color: Color.fromARGB(255, 31, 31, 31),
+                                color: const Color.fromARGB(255, 31, 31, 31),
                               ),
-                              padding: EdgeInsets.symmetric(
+                              padding: const EdgeInsets.symmetric(
                                 horizontal: 15,
                                 vertical: 6,
                               ),
                               child: Column(
                                 children: [
-                                  Row(
+                                  const Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     crossAxisAlignment:
@@ -225,12 +225,12 @@ class _DetailState extends State<Detail> {
                                     ],
                                   ),
                                   Container(
-                                    margin: EdgeInsets.only(
+                                    margin: const EdgeInsets.only(
                                       top: 3,
                                     ),
                                     width: double.infinity,
                                     height: 1,
-                                    decoration: BoxDecoration(
+                                    decoration: const BoxDecoration(
                                       color: Color.fromARGB(74, 255, 255, 255),
                                     ),
                                   ),
@@ -242,15 +242,15 @@ class _DetailState extends State<Detail> {
                               height: 80,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8),
-                                color: Color.fromARGB(255, 31, 31, 31),
+                                color: const Color.fromARGB(255, 31, 31, 31),
                               ),
-                              padding: EdgeInsets.symmetric(
+                              padding: const EdgeInsets.symmetric(
                                 horizontal: 15,
                                 vertical: 6,
                               ),
                               child: Column(
                                 children: [
-                                  Row(
+                                  const Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     crossAxisAlignment:
@@ -271,12 +271,12 @@ class _DetailState extends State<Detail> {
                                     ],
                                   ),
                                   Container(
-                                    margin: EdgeInsets.only(
+                                    margin: const EdgeInsets.only(
                                       top: 3,
                                     ),
                                     width: double.infinity,
                                     height: 1,
-                                    decoration: BoxDecoration(
+                                    decoration: const BoxDecoration(
                                       color: Color.fromARGB(74, 255, 255, 255),
                                     ),
                                   ),

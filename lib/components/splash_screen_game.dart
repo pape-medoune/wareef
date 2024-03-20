@@ -1,11 +1,9 @@
-import 'package:flutter/material.dart';
-import 'package:flame_splash_screen/flame_splash_screen.dart';
-import 'package:wareef/Pages/HomePage.dart';
 import 'package:another_flutter_splash_screen/another_flutter_splash_screen.dart';
+import 'package:flutter/material.dart';
 import 'package:wareef/auth/login.dart';
 
 class SplashScreenGame extends StatefulWidget {
-  const SplashScreenGame({Key? key}) : super(key: key);
+  const SplashScreenGame({super.key});
 
   @override
   SplashScreenGameState createState() => SplashScreenGameState();
@@ -48,17 +46,17 @@ class SplashScreenGameState extends State<SplashScreenGame> {
           //   },
           // ),
           FlutterSplashScreen.fadeIn(
-        backgroundColor: Color(0x00020206),
+        backgroundColor: const Color(0x00020206),
         onInit: () {
           debugPrint("On Init");
         },
         onEnd: () {
           debugPrint("On End");
         },
-        childWidget: SizedBox(
+        childWidget: const SizedBox(
           height: 200,
           width: 200,
-          child: const Text(
+          child: Text(
             'WAREËF',
             style: TextStyle(
               fontSize: 50,

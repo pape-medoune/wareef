@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:wareef/auth/Register.dart';
 
 class Login extends StatefulWidget {
-  const Login({Key? key}) : super(key: key);
+  const Login({super.key});
 
   @override
   _LoginState createState() => _LoginState();
@@ -15,7 +14,7 @@ class _LoginState extends State<Login> {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Container(
-            padding: EdgeInsets.symmetric(
+            padding: const EdgeInsets.symmetric(
               horizontal: 15,
             ),
             width: MediaQuery.of(context).size.width,
@@ -24,7 +23,7 @@ class _LoginState extends State<Login> {
                 const SizedBox(
                   height: 80,
                 ),
-                Text(
+                const Text(
                   "WAREËF",
                   style: TextStyle(
                     color: Colors.white,
@@ -34,7 +33,7 @@ class _LoginState extends State<Login> {
                 const SizedBox(
                   height: 80,
                 ),
-                Container(
+                const SizedBox(
                   width: double.infinity,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -50,10 +49,10 @@ class _LoginState extends State<Login> {
                         "Veuillez saisir vos identifiants pour vous connecter",
                         style: TextStyle(
                           fontSize: 15,
-                          color: const Color.fromARGB(148, 255, 255, 255),
+                          color: Color.fromARGB(148, 255, 255, 255),
                         ),
                       ),
-                      const SizedBox(
+                      SizedBox(
                         height: 8,
                       ),
                     ],
@@ -71,18 +70,18 @@ class _LoginState extends State<Login> {
                         // height: 60,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8),
-                          color: Color.fromARGB(255, 31, 31, 31),
+                          color: const Color.fromARGB(255, 31, 31, 31),
                         ),
-                        padding: EdgeInsets.symmetric(
+                        padding: const EdgeInsets.symmetric(
                           horizontal: 15,
                           vertical: 3,
                         ),
                         child: TextFormField(
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.white,
                             fontSize: 16,
                           ),
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             contentPadding: EdgeInsets.symmetric(
                               vertical: 5,
                             ),
@@ -121,19 +120,19 @@ class _LoginState extends State<Login> {
                         // height: 60,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8),
-                          color: Color.fromARGB(255, 31, 31, 31),
+                          color: const Color.fromARGB(255, 31, 31, 31),
                         ),
-                        padding: EdgeInsets.symmetric(
+                        padding: const EdgeInsets.symmetric(
                           horizontal: 15,
                           vertical: 3,
                         ),
                         child: TextFormField(
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.white,
                             fontSize: 16,
                           ),
                           obscureText: true,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             contentPadding: EdgeInsets.symmetric(
                               vertical: 5,
                             ),
@@ -160,7 +159,7 @@ class _LoginState extends State<Login> {
                       const SizedBox(
                         height: 15,
                       ),
-                      Container(
+                      const SizedBox(
                         width: double.infinity,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
@@ -186,13 +185,13 @@ class _LoginState extends State<Login> {
                           // height: 60,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8),
-                            color: Color.fromARGB(255, 2, 137, 96),
+                            color: const Color.fromARGB(255, 2, 137, 96),
                           ),
-                          padding: EdgeInsets.symmetric(
+                          padding: const EdgeInsets.symmetric(
                             horizontal: 15,
                             vertical: 16,
                           ),
-                          child: Text(
+                          child: const Text(
                             "S'identifier",
                             style: TextStyle(
                               fontSize: 16,
@@ -212,11 +211,11 @@ class _LoginState extends State<Login> {
                           Container(
                             width: 165,
                             height: 1,
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                               color: Colors.grey,
                             ),
                           ),
-                          Text(
+                          const Text(
                             "Ou",
                             style: TextStyle(
                               fontSize: 18,
@@ -226,7 +225,7 @@ class _LoginState extends State<Login> {
                           Container(
                             width: 165,
                             height: 1,
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                               color: Colors.grey,
                             ),
                           ),
@@ -238,7 +237,7 @@ class _LoginState extends State<Login> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text(
+                          const Text(
                             "Vous n'avez pas de compte?",
                             style: TextStyle(
                               fontSize: 13,
@@ -250,9 +249,9 @@ class _LoginState extends State<Login> {
                           ),
                           InkWell(
                             onTap: () {
-                             Navigator.pushNamed(context, "/register");
+                              Navigator.pushNamed(context, "/register");
                             },
-                            child: Text(
+                            child: const Text(
                               "S'inscrire",
                               style: TextStyle(
                                 fontSize: 13,
