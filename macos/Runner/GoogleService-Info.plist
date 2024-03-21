@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyCKP42dXaTHCMXMfc2lrMXKyG0lbuJx1iY</string>
+	<key>GCM_SENDER_ID</key>
+	<string>334427328373</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.wareef.RunnerTests</string>
+	<key>PROJECT_ID</key>
+	<string>wareef-51872</string>
+	<key>STORAGE_BUCKET</key>
+	<string>wareef-51872.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:334427328373:ios:312a6a4ac076b77a2a4d3c</string>
+</dict>
+</plist>

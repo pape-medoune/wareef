@@ -39,7 +39,7 @@ class _TasksListState extends State<TasksList>
         body: Consumer<TaskService>(
           builder: (context, value, child) {
             return ListView.builder(
-              itemCount: 3,
+              itemCount: value.tasks.length,
               itemBuilder: (context, index) {
                 return Column(
                   children: [

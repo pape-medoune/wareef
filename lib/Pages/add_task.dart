@@ -18,9 +18,13 @@ class _AddTaskState extends State<AddTask> {
   final TextEditingController _taskNameController = TextEditingController();
   final TextEditingController _taskDescriptionController =
       TextEditingController();
-  final TextEditingController _taskStartDateController =
-      TextEditingController();
-  final TextEditingController _taskEndDateController = TextEditingController();
+  // final TextEditingController _taskStartDateController =
+      // TextEditingController();
+  // final TextEditingController _taskEndDateController = TextEditingController();
+  final ValueNotifier<DateTime> _taskStartDateNotifier =
+      ValueNotifier<DateTime>(DateTime.now());
+  final ValueNotifier<DateTime> _taskEndDateNotifier =
+      ValueNotifier<DateTime>(DateTime.now());
 
   void _submit() {
     var isValid = false;
@@ -33,9 +37,10 @@ class _AddTaskState extends State<AddTask> {
             taskId: randomString(10),
             taskTitle: _taskNameController.text.trim(),
             taskDescription: _taskDescriptionController.text.trim(),
-            taskStartDate: DateTime.parse(_taskStartDateController.text.trim()),
-            taskEndDate: DateTime.parse(_taskEndDateController.text.trim()),
+            taskStartDate: _taskStartDateNotifier.value,
+            taskEndDate: _taskEndDateNotifier.value,
           ));
+            print(Task().taskStartDate);
     }
   }
 
@@ -231,6 +236,7 @@ class _AddTaskState extends State<AddTask> {
                                       ),
                                     ),
                                     child: DateChoice(
+                                      selectedDate: _taskStartDateNotifier,
                                         height:
                                             MediaQuery.of(context).size.height -
                                                 290),
@@ -265,6 +271,7 @@ class _AddTaskState extends State<AddTask> {
                                       ),
                                     ),
                                     child: DateChoice(
+                                      selectedDate: _taskEndDateNotifier,
                                         height:
                                             MediaQuery.of(context).size.height -
                                                 290),

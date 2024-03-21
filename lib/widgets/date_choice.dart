@@ -4,9 +4,11 @@ class DateChoice extends StatefulWidget {
   const DateChoice({
     super.key,
     required this.height,
+    required this.selectedDate,
   });
 
   final double height;
+  final ValueNotifier<DateTime> selectedDate;
 
   @override
   State<DateChoice> createState() => _DateChoiceState();

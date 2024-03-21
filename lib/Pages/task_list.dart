@@ -232,7 +232,7 @@ class _TaskListState extends State<TaskList>
                                           width: (MediaQuery.of(context)
                                                       .size
                                                       .width *
-                                                  66) /
+                                                  20) /
                                               100,
                                           height: 18,
                                           decoration: BoxDecoration(
