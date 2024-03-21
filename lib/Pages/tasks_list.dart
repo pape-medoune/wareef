@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:wareef/Pages/detail.dart';
+import 'package:wareef/Pages/edit_task.dart';
 import 'package:wareef/components/mini_card.dart';
 import 'package:wareef/services/task_service.dart';
 
@@ -38,6 +40,7 @@ class _TasksListState extends State<TasksList>
         ),
         body: Consumer<TaskService>(
           builder: (context, value, child) {
+            print(value.tasks.length);
             return ListView.builder(
               itemCount: value.tasks.length,
               itemBuilder: (context, index) {
@@ -53,21 +56,38 @@ class _TasksListState extends State<TasksList>
                                 motion: const ScrollMotion(),
                                 children: [
                                   SlidableAction(
-                                    onPressed: (BuildContext context) {},
+                                    onPressed: (context) {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                const Detail(),
+                                          ));
+                                    },
                                     backgroundColor: const Color(0xFF21B7CA),
                                     foregroundColor: Colors.white,
                                     icon: Icons.info_outline,
                                     label: 'Detail',
                                   ),
                                   SlidableAction(
-                                    onPressed: (_) => controller.close(),
+                                    onPressed: (context) {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const EditTask()));
+                                    },
                                     backgroundColor: const Color(0xFF0392CF),
                                     foregroundColor: Colors.white,
                                     icon: Icons.edit,
                                     label: 'Modifier',
                                   ),
                                   SlidableAction(
-                                    onPressed: (BuildContext context) {},
+                                    onPressed: (context) {
+                                      context
+                                          .read<TaskService>()
+                                          .removeTask('');
+                                    },
                                     backgroundColor: const Color(0xFFFE4A49),
                                     foregroundColor: Colors.white,
                                     icon: Icons.delete,
@@ -75,9 +95,10 @@ class _TasksListState extends State<TasksList>
                                   ),
                                 ],
                               ),
-                              child: const MiniCard(
-                                  title: "Examen ",
-                                  subtitle: "15 Mai",
+                              child: MiniCard(
+                                  title: "${value.tasks[index].taskTitle}",
+                                  subtitle:
+                                      "${value.tasks[index].taskStartDate!.day} - ${value.tasks[index].taskStartDate!.month} - ${value.tasks[index].taskStartDate!.year}",
                                   select: true)),
                         ],
                       ),
