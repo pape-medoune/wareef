@@ -1,8 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:wareef/components/MiniCard.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -15,8 +18,21 @@ class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
   @override
   late final controller = SlidableController(this);
+   final user = FirebaseAuth.instance.currentUser!;
+
+  List<String> usersId = [];
+
+  Future getUsersIDs() async {
+    await FirebaseFirestore.instance
+        .collection('users')
+        .get()
+        .then((value) => value.docs.forEach((element) {
+              usersId.add(element.reference.id);
+            }));
+  }
+
   Widget build(BuildContext context) {
-    int _currentIndex = 0;
+    
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -37,7 +53,7 @@ class _HomePageState extends State<HomePage>
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "You have got 5 tasks ",
+                            user.uid,
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 25,

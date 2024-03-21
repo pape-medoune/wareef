@@ -1,5 +1,33 @@
 import 'package:flutter/material.dart';
-import 'package:wareef/auth/Register.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:wareef/Pages/HomePage.dart';
+
+final FirebaseAuth _auth = FirebaseAuth.instance;
+ final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+
+   Future<void> _signIn(BuildContext context) async {
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: _emailController.text.trim(),
+        password: _passwordController.text.trim(),
+      ).then((_) {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => HomePage()),
+        );
+      });
+    } catch (e) {
+      print("Erreur de connexion: $e");
+      // Gérer les erreurs de connexion ici
+    }
+  }
+
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+  } 
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -78,6 +106,7 @@ class _LoginState extends State<Login> {
                           vertical: 3,
                         ),
                         child: TextFormField(
+                          controller: _emailController,
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 16,
@@ -128,6 +157,7 @@ class _LoginState extends State<Login> {
                           vertical: 3,
                         ),
                         child: TextFormField(
+                          controller: _passwordController,
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 16,
@@ -180,7 +210,7 @@ class _LoginState extends State<Login> {
                         height: 15,
                       ),
                       GestureDetector(
-                        onTap: () {},
+                         onTap:  () => _signIn(context),
                         child: Container(
                           width: double.infinity,
                           // height: 60,
@@ -250,7 +280,7 @@ class _LoginState extends State<Login> {
                           ),
                           InkWell(
                             onTap: () {
-                             Navigator.pushNamed(context, "/register");
+                              Navigator.pushNamed(context, "/register");
                             },
                             child: Text(
                               "S'inscrire",

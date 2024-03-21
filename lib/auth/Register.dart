@@ -1,12 +1,46 @@
-import 'package:flutter/material.dart';
-import 'package:wareef/auth/login.dart';
+import 'package:flutter/material.dart'; 
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:wareef/auth/AuthService.dart';
+import 'package:wareef/core.dart';
 
+final FirebaseAuth _auth = FirebaseAuth.instance;
+
+Future<UserCredential?> registerWithEmailAndPassword(String email, String password) async {
+  try {
+    UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+    return userCredential;
+  } catch (e) {
+    print('Error: $e');
+    return null;
+  }
+}
+
+// Future<UserCredential?> signInWithEmailAndPassword(String email, String password) async {
+//   try {
+//     UserCredential userCredential = await _auth.signInWithEmailAndPassword(
+//       email: email,
+//       password: password,
+//     );
+//     return userCredential;
+//   } catch (e) {
+//     print('Error: $e');
+//     return null;
+//   }
+// }
 class Register extends StatefulWidget {
   const Register({Key? key}) : super(key: key);
 
   @override
   _RegisterState createState() => _RegisterState();
 }
+
+ final TextEditingController _nomController = TextEditingController();
+ final TextEditingController _prenomController = TextEditingController();
+ final TextEditingController _emailController = TextEditingController();
+ final TextEditingController _passwordController = TextEditingController();
 
 class _RegisterState extends State<Register> {
   @override
@@ -71,13 +105,14 @@ class _RegisterState extends State<Register> {
                         // height: 60,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8),
-                          color:Color.fromARGB(255, 31, 31, 31),
+                          color: Color.fromARGB(255, 31, 31, 31),
                         ),
                         padding: EdgeInsets.symmetric(
                           horizontal: 15,
                           vertical: 3,
                         ),
                         child: TextFormField(
+                          controller: _nomController,
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 16,
@@ -95,12 +130,12 @@ class _RegisterState extends State<Register> {
                             ),
                             focusedBorder: UnderlineInputBorder(
                               borderSide: BorderSide(
-                                color:Color.fromARGB(255, 31, 31, 31),
+                                color: Color.fromARGB(255, 31, 31, 31),
                               ),
                             ),
                             enabledBorder: UnderlineInputBorder(
                               borderSide: BorderSide(
-                                color:Color.fromARGB(255, 31, 31, 31),
+                                color: Color.fromARGB(255, 31, 31, 31),
                               ),
                             ),
                           ),
@@ -121,13 +156,14 @@ class _RegisterState extends State<Register> {
                         // height: 60,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8),
-                          color:Color.fromARGB(255, 31, 31, 31),
+                          color: Color.fromARGB(255, 31, 31, 31),
                         ),
                         padding: EdgeInsets.symmetric(
                           horizontal: 15,
                           vertical: 3,
                         ),
                         child: TextFormField(
+                          controller: _prenomController,
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 16,
@@ -145,12 +181,12 @@ class _RegisterState extends State<Register> {
                             ),
                             focusedBorder: UnderlineInputBorder(
                               borderSide: BorderSide(
-                               color: Color.fromARGB(255, 31, 31, 31),
+                                color: Color.fromARGB(255, 31, 31, 31),
                               ),
                             ),
                             enabledBorder: UnderlineInputBorder(
                               borderSide: BorderSide(
-                                color:Color.fromARGB(255, 31, 31, 31),
+                                color: Color.fromARGB(255, 31, 31, 31),
                               ),
                             ),
                           ),
@@ -171,13 +207,14 @@ class _RegisterState extends State<Register> {
                         // height: 60,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8),
-                          color:Color.fromARGB(255, 31, 31, 31),
+                          color: Color.fromARGB(255, 31, 31, 31),
                         ),
                         padding: EdgeInsets.symmetric(
                           horizontal: 15,
                           vertical: 3,
                         ),
                         child: TextFormField(
+                          controller: _emailController,
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 16,
@@ -195,12 +232,12 @@ class _RegisterState extends State<Register> {
                             ),
                             focusedBorder: UnderlineInputBorder(
                               borderSide: BorderSide(
-                               color: Color.fromARGB(255, 31, 31, 31),
+                                color: Color.fromARGB(255, 31, 31, 31),
                               ),
                             ),
                             enabledBorder: UnderlineInputBorder(
                               borderSide: BorderSide(
-                               color: Color.fromARGB(255, 31, 31, 31),
+                                color: Color.fromARGB(255, 31, 31, 31),
                               ),
                             ),
                           ),
@@ -221,13 +258,14 @@ class _RegisterState extends State<Register> {
                         // height: 60,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8),
-                          color:Color.fromARGB(255, 31, 31, 31),
+                          color: Color.fromARGB(255, 31, 31, 31),
                         ),
                         padding: EdgeInsets.symmetric(
                           horizontal: 15,
                           vertical: 3,
                         ),
                         child: TextFormField(
+                          controller: _passwordController,
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 16,
@@ -246,12 +284,12 @@ class _RegisterState extends State<Register> {
                             ),
                             focusedBorder: UnderlineInputBorder(
                               borderSide: BorderSide(
-                                color:Color.fromARGB(255, 31, 31, 31),
+                                color: Color.fromARGB(255, 31, 31, 31),
                               ),
                             ),
                             enabledBorder: UnderlineInputBorder(
                               borderSide: BorderSide(
-                                color:Color.fromARGB(255, 31, 31, 31),
+                                color: Color.fromARGB(255, 31, 31, 31),
                               ),
                             ),
                           ),
@@ -269,13 +307,14 @@ class _RegisterState extends State<Register> {
                               // height: 60,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8),
-                                color:Color.fromARGB(255, 31, 31, 31),
+                                color: Color.fromARGB(255, 31, 31, 31),
                               ),
                               padding: EdgeInsets.symmetric(
                                 horizontal: 15,
                                 vertical: 3,
                               ),
                               child: TextFormField(
+
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 16,
@@ -299,7 +338,7 @@ class _RegisterState extends State<Register> {
                                   ),
                                   enabledBorder: UnderlineInputBorder(
                                     borderSide: BorderSide(
-                                     color: Color.fromARGB(255, 31, 31, 31),
+                                      color: Color.fromARGB(255, 31, 31, 31),
                                     ),
                                   ),
                                 ),
@@ -328,7 +367,25 @@ class _RegisterState extends State<Register> {
                               height: 10,
                             ),
                             GestureDetector(
-                              onTap: () {},
+                              onTap: () async {
+                                final message =
+                                    await AuthService().registration(
+                                  prenom: _prenomController.text,
+                                  nom: _nomController.text,
+                                  email: _emailController.text,
+                                  password: _passwordController.text,
+                                );
+                                if (message!.contains('Success')) {
+                                  Navigator.of(context).pushReplacement(
+                                      MaterialPageRoute(
+                                          builder: (context) => const Login()));
+                                }
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(message),
+                                  ),
+                                );
+                              },
                               child: Container(
                                 width: double.infinity,
                                 // height: 60,
@@ -341,7 +398,7 @@ class _RegisterState extends State<Register> {
                                   vertical: 16,
                                 ),
                                 child: Text(
-                                  "S'identifier",
+                                  "S'inscrire",
                                   style: TextStyle(
                                     fontSize: 16,
                                     color: Colors.white,

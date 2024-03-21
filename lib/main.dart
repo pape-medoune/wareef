@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:wareef/Pages/Detail.dart';
 import 'package:wareef/Pages/HomePage.dart';
@@ -26,11 +27,33 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         scaffoldBackgroundColor: Color(0x00020206),
       ),
-      home: addTask(),
+      home: Register(),
       routes: {
         "/home": (_) => HomePage(),
         "/login": (_) => Login(),
         "/register": (_) => Register(),
+      },
+    );
+  }
+}
+
+class AuthenticationWrapper extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder<User?>(
+      stream: FirebaseAuth.instance.authStateChanges(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return CircularProgressIndicator();
+        } else {
+          if (snapshot.hasData) {
+            // Utilisateur connecté
+            return HomePage();
+          } else {
+            // Utilisateur non connecté
+            return Register();
+          }
+        }
       },
     );
   }
