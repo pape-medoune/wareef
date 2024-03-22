@@ -3,31 +3,65 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:wareef/Pages/HomePage.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
- final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
+final _emailController = TextEditingController();
+final _passwordController = TextEditingController();
 
-   Future<void> _signIn(BuildContext context) async {
-    try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: _emailController.text.trim(),
-        password: _passwordController.text.trim(),
-      ).then((_) {
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => HomePage()),
+Future<void> _signIn(BuildContext context) async {
+  try {
+    await FirebaseAuth.instance
+        .signInWithEmailAndPassword(
+      email: _emailController.text.trim(),
+      password: _passwordController.text.trim(),
+    )
+        .then((_) {
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => HomePage()),
+      );
+    });
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Connexion réussie'),
+          content: Text('Vous êtes maintenant connecté.'),
+          actions: <Widget>[
+            TextButton(
+              child: Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
         );
-      });
-    } catch (e) {
-      print("Erreur de connexion: $e");
-      // Gérer les erreurs de connexion ici
-    }
+      },
+    );
+  } catch (e) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Erreur de connexion'),
+          content: Text('Veuillez vérifier vos identifiants et réessayer.'),
+          actions: <Widget>[
+            TextButton(
+              child: Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
+}
 
-
-  @override
-  void dispose() {
-    _emailController.dispose();
-    _passwordController.dispose();
-  } 
+@override
+void dispose() {
+  _emailController.dispose();
+  _passwordController.dispose();
+}
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -210,7 +244,7 @@ class _LoginState extends State<Login> {
                         height: 15,
                       ),
                       GestureDetector(
-                         onTap:  () => _signIn(context),
+                        onTap: () => _signIn(context),
                         child: Container(
                           width: double.infinity,
                           // height: 60,

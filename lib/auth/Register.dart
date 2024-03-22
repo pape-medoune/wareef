@@ -1,22 +1,26 @@
-import 'package:flutter/material.dart'; 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:wareef/auth/AuthService.dart';
 import 'package:wareef/core.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 
-Future<UserCredential?> registerWithEmailAndPassword(String email, String password) async {
-  try {
-    UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
-      email: email,
-      password: password,
-    );
-    return userCredential;
-  } catch (e) {
-    print('Error: $e');
-    return null;
-  }
-}
+// Future<UserCredential?> registerWithEmailAndPassword(
+//     String email, String password) async {
+//   try {
+//     UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
+//       email: email,
+//       password: password,
+//     );
+//     return userCredential;
+//   } catch (e) {
+//     print('Error: $e');
+//     return null;
+//   }
+// }
+
+
 
 // Future<UserCredential?> signInWithEmailAndPassword(String email, String password) async {
 //   try {
@@ -37,12 +41,90 @@ class Register extends StatefulWidget {
   _RegisterState createState() => _RegisterState();
 }
 
- final TextEditingController _nomController = TextEditingController();
- final TextEditingController _prenomController = TextEditingController();
- final TextEditingController _emailController = TextEditingController();
- final TextEditingController _passwordController = TextEditingController();
+
 
 class _RegisterState extends State<Register> {
+  final TextEditingController _nomController = TextEditingController();
+final TextEditingController _prenomController = TextEditingController();
+final TextEditingController _emailController = TextEditingController();
+final TextEditingController _passwordController = TextEditingController();
+final TextEditingController _confirmPasswordController = TextEditingController();
+@override
+void dispose()
+{
+  _nomController.dispose();
+  _prenomController.dispose();
+  _emailController.dispose();
+  _passwordController.dispose();
+  _confirmPasswordController.dispose();
+  super.dispose();
+}
+
+
+Future signUp() async {
+ try {
+    UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      email: _emailController.text.trim(),
+      password: _passwordController.text.trim(),
+    ); 
+    await addUserDetails(
+      _prenomController.text.trim(),
+      _nomController.text.trim(),
+      _emailController.text.trim(),
+      userCredential.user!.uid, 
+    );
+    
+    
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Inscription réussie'),
+          content: Text('Vous êtes maintenant inscrit.'),
+          actions: <Widget>[
+            TextButton(
+              child: Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop();  
+              },
+            ),
+          ],
+        );
+      },
+    );
+ } catch (e) {
+     
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Erreur lors de l\'inscription'),
+          content: Text('Veuillez vérifier vos informations et réessayer.'),
+          actions: <Widget>[
+            TextButton(
+              child: Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop();  
+              },
+            ),
+          ],
+        );
+      },
+    );
+ }
+}
+
+
+Future addUserDetails(String prenom, String nom, String email, String uid_person) async {
+  await FirebaseFirestore.instance.collection('users').add({
+    'uid': uid_person,
+    'prenom': prenom,
+    'nom': nom,
+    'email': email,
+
+  });
+}
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -314,7 +396,6 @@ class _RegisterState extends State<Register> {
                                 vertical: 3,
                               ),
                               child: TextFormField(
-
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 16,
@@ -367,25 +448,27 @@ class _RegisterState extends State<Register> {
                               height: 10,
                             ),
                             GestureDetector(
-                              onTap: () async {
-                                final message =
-                                    await AuthService().registration(
-                                  prenom: _prenomController.text,
-                                  nom: _nomController.text,
-                                  email: _emailController.text,
-                                  password: _passwordController.text,
-                                );
-                                if (message!.contains('Success')) {
-                                  Navigator.of(context).pushReplacement(
-                                      MaterialPageRoute(
-                                          builder: (context) => const Login()));
-                                }
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text(message),
-                                  ),
-                                );
-                              },
+
+                              // onTap: () async {
+                              //   final message =
+                              //       await AuthService().registration(
+                              //     prenom: _prenomController.text,
+                              //     nom: _nomController.text,
+                              //     email: _emailController.text,
+                              //     password: _passwordController.text,
+                              //   );
+                              //   if (message!.contains('Success')) {
+                              //     Navigator.of(context).pushReplacement(
+                              //         MaterialPageRoute(
+                              //             builder: (context) => const Login()));
+                              //   }
+                              //   ScaffoldMessenger.of(context).showSnackBar(
+                              //     SnackBar(
+                              //       content: Text(message),
+                              //     ),
+                              //   );
+                              // },
+                              onTap: signUp,
                               child: Container(
                                 width: double.infinity,
                                 // height: 60,

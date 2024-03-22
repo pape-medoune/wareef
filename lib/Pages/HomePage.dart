@@ -18,7 +18,7 @@ class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
   @override
   late final controller = SlidableController(this);
-   final user = FirebaseAuth.instance.currentUser!;
+  final user = FirebaseAuth.instance.currentUser!;
 
   List<String> usersId = [];
 
@@ -31,8 +31,38 @@ class _HomePageState extends State<HomePage>
             }));
   }
 
+  String userPrenom = '';
+
+  @override
+  void initState() {
+    super.initState();
+    getUserPrenom().then((value) {
+      setState(() {
+        userPrenom = value;
+      });
+    });
+  }
+
+  Future<String> getUserPrenom() async {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user == null) {
+      print('User is not authenticated');
+      return 'User is not authenticated';
+    }
+    final userDoc = await FirebaseFirestore.instance
+        .collection('users')
+        .where('uid', isEqualTo: user.uid)
+        .get();
+
+    if (userDoc.docs.isEmpty) {
+      print('User document does not exist');
+      return 'User document does not exist';
+    } else {
+      return userDoc.docs.first.data()?['prenom'] ?? 'No prenom found';
+    }
+  }
+
   Widget build(BuildContext context) {
-    
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -53,7 +83,7 @@ class _HomePageState extends State<HomePage>
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            user.uid,
+                            'Bonjour $userPrenom',
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 25,
@@ -61,18 +91,35 @@ class _HomePageState extends State<HomePage>
                             ),
                           ),
                           Text(
-                            "today to complete",
+                            "Bienvenue dans l'application",
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: 25,
-                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                              fontWeight: FontWeight.normal,
                             ),
                           ),
                         ],
                       ),
-                      CircleAvatar(
-                        child: Image.asset("images/image 7.png"),
+                      // CircleAvatar(
+                      // child: Image.asset("images/image 7.png"),
+                      Container(
+                        padding: EdgeInsets.all(12), 
+                        decoration: BoxDecoration(
+                        color:Color.fromARGB(255, 186, 131, 222),
+                          // border: Border.all(
+                          //   width: 1,
+                          //   color: Colors.white,
+                          // ),
+                          borderRadius:BorderRadius.circular(8,),
+                        ),
+
+                        child: Icon(
+                          Icons.menu_open_sharp,
+                          size: 30,
+                          color: Colors.white,
+                        ),
                       ),
+                      // ),
                     ],
                   ),
                   const SizedBox(
@@ -321,16 +368,15 @@ class _HomePageState extends State<HomePage>
                                   select: false,
                                 ),
                                 const SizedBox(
-                              height: 15,
-                            ),
-                            MiniCard(
+                                  height: 15,
+                                ),
+                                MiniCard(
                                   title: "Apprendre Leçon ",
                                   subtitle: "17 Mars",
                                   select: true,
                                 ),
                               ],
                             ),
-                            
                             const SizedBox(
                               height: 20,
                             ),
@@ -357,7 +403,6 @@ class _HomePageState extends State<HomePage>
                             const SizedBox(
                               height: 15,
                             ),
-                            
                           ],
                         ),
                       ],
@@ -380,46 +425,47 @@ class _HomePageState extends State<HomePage>
         child: Icon(
           Icons.add,
           size: 30,
+          color:Colors.white,
         ),
       ),
-    //   bottomNavigationBar: SalomonBottomBar(
-    //     itemPadding: EdgeInsets.symmetric(
-    //       horizontal: 15,
-    //       vertical: 15,
-    //     ),
-    //     backgroundColor: Colors.white,
-    //     currentIndex: _currentIndex,
-    //     onTap: (i) => setState(() => _currentIndex = i),
-    //     items: [
-    //       /// Home
-    //       SalomonBottomBarItem(
-    //         icon: Icon(Icons.home),
-    //         title: Text("Accueil"),
-    //         selectedColor: Colors.purple,
-    //       ),
+      //   bottomNavigationBar: SalomonBottomBar(
+      //     itemPadding: EdgeInsets.symmetric(
+      //       horizontal: 15,
+      //       vertical: 15,
+      //     ),
+      //     backgroundColor: Colors.white,
+      //     currentIndex: _currentIndex,
+      //     onTap: (i) => setState(() => _currentIndex = i),
+      //     items: [
+      //       /// Home
+      //       SalomonBottomBarItem(
+      //         icon: Icon(Icons.home),
+      //         title: Text("Accueil"),
+      //         selectedColor: Colors.purple,
+      //       ),
 
-    //       /// Likes
-    //       SalomonBottomBarItem(
-    //         icon: Icon(Icons.task),
-    //         title: Text("Tâches"),
-    //         selectedColor: Colors.pink,
-    //       ),
+      //       /// Likes
+      //       SalomonBottomBarItem(
+      //         icon: Icon(Icons.task),
+      //         title: Text("Tâches"),
+      //         selectedColor: Colors.pink,
+      //       ),
 
-    //       /// Profile
-    //       SalomonBottomBarItem(
-    //         icon: Icon(Icons.person),
-    //         title: Text("Profile"),
-    //         selectedColor: Colors.teal,
-    //       ),
+      //       /// Profile
+      //       SalomonBottomBarItem(
+      //         icon: Icon(Icons.person),
+      //         title: Text("Profile"),
+      //         selectedColor: Colors.teal,
+      //       ),
 
-    //       /// Search
-    //       SalomonBottomBarItem(
-    //         icon: Icon(Icons.info),
-    //         title: Text("A propos"),
-    //         selectedColor: Colors.orange,
-    //       ),
-    //     ],
-    //   ),
+      //       /// Search
+      //       SalomonBottomBarItem(
+      //         icon: Icon(Icons.info),
+      //         title: Text("A propos"),
+      //         selectedColor: Colors.orange,
+      //       ),
+      //     ],
+      //   ),
     );
   }
 }
