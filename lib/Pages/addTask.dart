@@ -32,22 +32,16 @@ class _addTaskState extends State<addTask> {
                       children: [
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            GestureDetector(
-                              onTap: () {},
-                              child: Image.asset(
-                                "images/Group 21.png",
-                              ),
-                            ),
+                             
                             Text(
                               "Ajouter une nouvelle tâche",
                               style: TextStyle(
                                 fontSize: 25,
                                 color: Colors.white,
                               ),
-                            ),
-                            Container(),
+                            ), 
                           ],
                         ),
                         SizedBox(
