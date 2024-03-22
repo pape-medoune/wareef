@@ -16,6 +16,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   late final controller = SlidableController(this);
   final user = FirebaseAuth.instance.currentUser!;
@@ -32,6 +33,7 @@ class _HomePageState extends State<HomePage>
   }
 
   String userPrenom = '';
+  String userNom = '';
 
   @override
   void initState() {
@@ -39,6 +41,11 @@ class _HomePageState extends State<HomePage>
     getUserPrenom().then((value) {
       setState(() {
         userPrenom = value;
+      });
+    });
+    getUserNom().then((value) {
+      setState(() {
+        userNom = value;
       });
     });
   }
@@ -62,8 +69,28 @@ class _HomePageState extends State<HomePage>
     }
   }
 
+  Future<String> getUserNom() async {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user == null) {
+      print('User is not authenticated');
+      return 'User is not authenticated';
+    }
+    final userDoc = await FirebaseFirestore.instance
+        .collection('users')
+        .where('uid', isEqualTo: user.uid)
+        .get();
+
+    if (userDoc.docs.isEmpty) {
+      print('User document does not exist');
+      return 'User document does not exist';
+    } else {
+      return userDoc.docs.first.data()?['nom'] ?? 'No prenom found';
+    }
+  }
+  int _currentIndex = 0;
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Container(
@@ -100,26 +127,25 @@ class _HomePageState extends State<HomePage>
                           ),
                         ],
                       ),
-                      // CircleAvatar(
-                      // child: Image.asset("images/image 7.png"),
-                      Container(
-                        padding: EdgeInsets.all(12), 
-                        decoration: BoxDecoration(
-                        color:Color.fromARGB(255, 186, 131, 222),
-                          // border: Border.all(
-                          //   width: 1,
-                          //   color: Colors.white,
-                          // ),
-                          borderRadius:BorderRadius.circular(8,),
-                        ),
-
-                        child: Icon(
-                          Icons.menu_open_sharp,
-                          size: 30,
-                          color: Colors.white,
+                      GestureDetector(
+                        onTap: () {
+                          _scaffoldKey.currentState?.openDrawer();
+                        },
+                        child: Container(
+                          padding: EdgeInsets.all(12),
+                          decoration: BoxDecoration(
+                            color: Color.fromARGB(255, 186, 131, 222),
+                            borderRadius: BorderRadius.circular(
+                              8,
+                            ),
+                          ),
+                          child: Icon(
+                            Icons.menu_open_sharp,
+                            size: 30,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
-                      // ),
                     ],
                   ),
                   const SizedBox(
@@ -414,6 +440,124 @@ class _HomePageState extends State<HomePage>
           ),
         ),
       ),
+      drawer: Drawer(
+        child: Container(
+          decoration: BoxDecoration(
+            color: Color(
+              0xff2F2F2F,
+            ),
+          ),
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: [
+              DrawerHeader(
+                decoration: BoxDecoration(
+                  color: Color(
+                    0xff2F2F2F,
+                  ),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Column(
+                      children: [
+                        CircleAvatar(
+                          child: Image.asset(
+                            "images/imagepeople-removebg-preview.png",
+                            width: 500,
+                            height: 500,
+                          ),
+                        ),
+                        const SizedBox(height: 10,),
+                        Text(
+                          "$userPrenom  $userNom",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                          ),
+                        ),
+                        const SizedBox(height: 5,),
+                        Text(
+                          user.email!,
+                          style: TextStyle(
+                            color: const Color.fromARGB(154, 255, 255, 255),
+                            fontSize: 15,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                // decoration: BoxDecoration(color:Colors.deepPurple),
+                width: double.infinity,
+                height: MediaQuery.of(context).size.height / 1.4,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      children: [
+                        ListTile(
+                          title: Text(
+                            'Home',
+                            style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
+                          ),
+                          leading: Icon(
+                            Icons.home,
+                            size: 28,
+                            color: Colors.white,
+                          ),
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                        ),
+                        ListTile(
+                          title: Text(
+                            'About',
+                            style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
+                          ),
+                          leading: Icon(
+                            Icons.info,
+                            size: 28,
+                            color: Colors.white,
+                          ),
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                        ),
+                      ],
+                    ),
+                    ListTile(
+                      title: Text(
+                        'Logout',
+                        style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
+                      ),
+                      leading: Icon(
+                        Icons.logout,
+                        size: 28,
+                        color: Colors.white,
+                      ),
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
         shape: RoundedRectangleBorder(
@@ -425,47 +569,74 @@ class _HomePageState extends State<HomePage>
         child: Icon(
           Icons.add,
           size: 30,
-          color:Colors.white,
+          color: Colors.white,
         ),
       ),
-      //   bottomNavigationBar: SalomonBottomBar(
-      //     itemPadding: EdgeInsets.symmetric(
-      //       horizontal: 15,
-      //       vertical: 15,
-      //     ),
-      //     backgroundColor: Colors.white,
-      //     currentIndex: _currentIndex,
-      //     onTap: (i) => setState(() => _currentIndex = i),
-      //     items: [
-      //       /// Home
-      //       SalomonBottomBarItem(
-      //         icon: Icon(Icons.home),
-      //         title: Text("Accueil"),
-      //         selectedColor: Colors.purple,
-      //       ),
-
-      //       /// Likes
-      //       SalomonBottomBarItem(
-      //         icon: Icon(Icons.task),
-      //         title: Text("Tâches"),
-      //         selectedColor: Colors.pink,
-      //       ),
-
-      //       /// Profile
-      //       SalomonBottomBarItem(
-      //         icon: Icon(Icons.person),
-      //         title: Text("Profile"),
-      //         selectedColor: Colors.teal,
-      //       ),
-
-      //       /// Search
-      //       SalomonBottomBarItem(
-      //         icon: Icon(Icons.info),
-      //         title: Text("A propos"),
-      //         selectedColor: Colors.orange,
-      //       ),
-      //     ],
-      //   ),
+      bottomNavigationBar: SalomonBottomBar(
+        backgroundColor: Color(
+          0xffD6D6D6,
+        ),
+        itemPadding: EdgeInsets.symmetric(
+          horizontal: 30,
+          vertical: 15,
+        ),
+        currentIndex: _currentIndex,
+        onTap: (i) => setState(() => _currentIndex = i),
+        items: [
+          /// Home
+          SalomonBottomBarItem(
+            icon: Icon(
+              Icons.home,
+              color: Color(
+                0xff4E4E4E,
+              ),
+            ),
+            title: Text(
+              "Accueil",
+              style: TextStyle(
+                color: Color(
+                  0xff4E4E4E,
+                ),
+              ),
+            ),
+            selectedColor: Color.fromARGB(255, 143, 143, 143),
+          ),
+  SalomonBottomBarItem(
+            icon: Icon(
+              Icons.task,
+              color: Color(
+                0xff4E4E4E,
+              ),
+            ),
+            title: Text(
+              "Les tâches",
+              style: TextStyle(
+                color: Color(
+                  0xff4E4E4E,
+                ),
+              ),
+            ),
+            selectedColor: Color.fromARGB(255, 143, 143, 143),
+          ),
+          SalomonBottomBarItem(
+            icon: Icon(
+              Icons.info,
+              color: Color(
+                0xff4E4E4E,
+              ),
+            ),
+            title: Text(
+              "A propos",
+              style: TextStyle(
+                color: Color(
+                  0xff4E4E4E,
+                ),
+              ),
+            ),
+            selectedColor: Color.fromARGB(255, 143, 143, 143),
+          ),
+        ],
+      ),
     );
   }
 }
