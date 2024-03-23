@@ -30,9 +30,13 @@ class _addTaskState extends State<addTask> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
+                        
+                        SizedBox(
+                          height: 100,
+                        ),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                              
                             Text(
@@ -41,11 +45,13 @@ class _addTaskState extends State<addTask> {
                                 fontSize: 25,
                                 color: Colors.white,
                               ),
+                              textAlign: TextAlign.left,
                             ), 
                           ],
                         ),
+                        
                         SizedBox(
-                          height: 130,
+                          height: 20,
                         ),
                         Container(
                           child: Column(
