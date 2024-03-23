@@ -19,6 +19,21 @@ class TaskService with ChangeNotifier {
     notifyListeners();
   }
 
+  Stream<List<Task>> getTasks() {
+    return firestore
+        .collection('tasks')
+        .snapshots()
+        .map((snapshot) => snapshot.docs
+            .map((doc) => Task(
+                  taskId: doc.id,
+                  taskTitle: doc['title'],
+                  taskDescription: doc['description'],
+                  taskStartDate: DateTime.parse(doc['start_date']),
+                  taskEndDate: DateTime.parse(doc['end_date']),
+                ))
+            .toList());
+  }
+
   updateTask(Task task) async {
     var index = tasks.indexWhere((element) => element.taskId == task.taskId);
     if (index != -1) {
@@ -33,12 +48,9 @@ class TaskService with ChangeNotifier {
     notifyListeners();
   }
 
-  removeTask(id) async {
-    var index = tasks.indexWhere((element) => element.taskId == id.taskId);
-    if (index != -1) {
-      await firestore.collection('tasks').doc(id).delete();
-      tasks.removeAt(index);
-    }
+  Future<void> deleteTask(String id) async {
+    await firestore.collection('tasks').doc(id).delete();
     notifyListeners();
   }
+
 }

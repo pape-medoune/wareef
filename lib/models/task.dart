@@ -1,5 +1,5 @@
 class Task {
-  String? taskId;
+  String taskId;
   String? taskTitle;
   String? taskDescription;
   DateTime? taskStartDate;
@@ -7,7 +7,7 @@ class Task {
   bool completed;
 
   Task(
-      {this.taskId,
+      {required this.taskId,
       this.taskTitle,
       this.taskDescription,
       this.taskStartDate,

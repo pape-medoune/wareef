@@ -6,6 +6,7 @@ import 'package:wareef/Pages/detail.dart';
 import 'package:wareef/Pages/edit_task.dart';
 import 'package:wareef/components/mini_card.dart';
 import 'package:wareef/services/task_service.dart';
+import 'package:wareef/widgets/motion_toast.dart';
 
 class TasksList extends StatefulWidget {
   const TasksList({super.key});
@@ -84,9 +85,12 @@ class _TasksListState extends State<TasksList>
                                   ),
                                   SlidableAction(
                                     onPressed: (context) {
-                                      context
-                                          .read<TaskService>()
-                                          .removeTask('');
+                                      Provider.of<TaskService>(context,
+                                              listen: false)
+                                          .deleteTask(
+                                              value.tasks[index].taskId);
+                                      displaySuccessMotionToast(context,
+                                          "Tâche supprimée avec succés");
                                     },
                                     backgroundColor: const Color(0xFFFE4A49),
                                     foregroundColor: Colors.white,

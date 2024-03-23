@@ -36,7 +36,7 @@ class _EditTaskState extends State<EditTask> {
             taskStartDate: _taskStartDateNotifier.value,
             taskEndDate: _taskEndDateNotifier.value,
           ));
-      print(Task().taskStartDate);
+      // print(Task().taskStartDate);
     }
   }
 

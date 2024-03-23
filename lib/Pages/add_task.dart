@@ -5,6 +5,7 @@ import 'package:random_string/random_string.dart';
 import 'package:wareef/models/task.dart';
 import 'package:wareef/services/task_service.dart';
 import 'package:wareef/widgets/date_choice.dart';
+import 'package:wareef/widgets/motion_toast.dart';
 
 class AddTask extends StatefulWidget {
   const AddTask({super.key});
@@ -19,7 +20,7 @@ class _AddTaskState extends State<AddTask> {
   final TextEditingController _taskDescriptionController =
       TextEditingController();
   // final TextEditingController _taskStartDateController =
-      // TextEditingController();
+  // TextEditingController();
   // final TextEditingController _taskEndDateController = TextEditingController();
   final ValueNotifier<DateTime> _taskStartDateNotifier =
       ValueNotifier<DateTime>(DateTime.now());
@@ -40,7 +41,12 @@ class _AddTaskState extends State<AddTask> {
             taskStartDate: _taskStartDateNotifier.value,
             taskEndDate: _taskEndDateNotifier.value,
           ));
-            print(Task().taskStartDate);
+      _taskNameController.clear();
+      _taskDescriptionController.clear();
+      displaySuccessMotionToast(context, 'Tâche ajoutée avec succés');
+      Navigator.pop(context);
+    } else {
+      displayErrorMotionToast(context, 'Les champs sont obligatoires');
     }
   }
 
@@ -236,7 +242,7 @@ class _AddTaskState extends State<AddTask> {
                                       ),
                                     ),
                                     child: DateChoice(
-                                      selectedDate: _taskStartDateNotifier,
+                                        selectedDate: _taskStartDateNotifier,
                                         height:
                                             MediaQuery.of(context).size.height -
                                                 290),
@@ -271,7 +277,7 @@ class _AddTaskState extends State<AddTask> {
                                       ),
                                     ),
                                     child: DateChoice(
-                                      selectedDate: _taskEndDateNotifier,
+                                        selectedDate: _taskEndDateNotifier,
                                         height:
                                             MediaQuery.of(context).size.height -
                                                 290),
