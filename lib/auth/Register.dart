@@ -1,6 +1,39 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:wareef/auth/login.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:wareef/auth/AuthService.dart';
+import 'package:wareef/core.dart';
 
+final FirebaseAuth _auth = FirebaseAuth.instance;
+
+// Future<UserCredential?> registerWithEmailAndPassword(
+//     String email, String password) async {
+//   try {
+//     UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
+//       email: email,
+//       password: password,
+//     );
+//     return userCredential;
+//   } catch (e) {
+//     print('Error: $e');
+//     return null;
+//   }
+// }
+
+
+
+// Future<UserCredential?> signInWithEmailAndPassword(String email, String password) async {
+//   try {
+//     UserCredential userCredential = await _auth.signInWithEmailAndPassword(
+//       email: email,
+//       password: password,
+//     );
+//     return userCredential;
+//   } catch (e) {
+//     print('Error: $e');
+//     return null;
+//   }
+// }
 class Register extends StatefulWidget {
   const Register({Key? key}) : super(key: key);
 
@@ -8,7 +41,97 @@ class Register extends StatefulWidget {
   _RegisterState createState() => _RegisterState();
 }
 
+
+
 class _RegisterState extends State<Register> {
+  final TextEditingController _nomController = TextEditingController();
+final TextEditingController _prenomController = TextEditingController();
+final TextEditingController _emailController = TextEditingController();
+final TextEditingController _passwordController = TextEditingController();
+final TextEditingController _confirmPasswordController = TextEditingController();
+@override
+void dispose()
+{
+  _nomController.dispose();
+  _prenomController.dispose();
+  _emailController.dispose();
+  _passwordController.dispose();
+  _confirmPasswordController.dispose();
+  super.dispose();
+}
+
+bool _isLoading =false;
+Future signUp() async {
+ try {
+  setState(() {
+        _isLoading = true; // Mettre à jour l'état de chargement
+      });
+    UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      email: _emailController.text.trim(),
+      password: _passwordController.text.trim(),
+    ); 
+    await addUserDetails(
+      _prenomController.text.trim(),
+      _nomController.text.trim(),
+      _emailController.text.trim(),
+      userCredential.user!.uid, 
+    );
+    
+    
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Inscription réussie'),
+          content: Text('Vous êtes maintenant inscrit.'),
+          actions: <Widget>[
+            TextButton(
+              child: Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop();  
+              },
+            ),
+          ],
+        );
+      },
+    );
+ } catch (e) {
+     
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Erreur lors de l\'inscription'),
+          content: Text('Veuillez vérifier vos informations et réessayer.'),
+          actions: <Widget>[
+            TextButton(
+              child: Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop();  
+              },
+            ),
+          ],
+        );
+      },
+    );
+ }finally {
+      setState(() {
+        _isLoading = false; // Mettre à jour l'état de chargement
+      });
+    }
+}
+
+
+Future addUserDetails(String prenom, String nom, String email, String uid_person) async {
+  await FirebaseFirestore.instance.collection('users').add({
+    'uid': uid_person,
+    'prenom': prenom,
+    'nom': nom,
+    'email': email,
+
+  });
+}
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,13 +194,14 @@ class _RegisterState extends State<Register> {
                         // height: 60,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8),
-                          color:Color.fromARGB(255, 31, 31, 31),
+                          color: Color.fromARGB(255, 31, 31, 31),
                         ),
                         padding: EdgeInsets.symmetric(
                           horizontal: 15,
                           vertical: 3,
                         ),
                         child: TextFormField(
+                          controller: _nomController,
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 16,
@@ -95,12 +219,12 @@ class _RegisterState extends State<Register> {
                             ),
                             focusedBorder: UnderlineInputBorder(
                               borderSide: BorderSide(
-                                color:Color.fromARGB(255, 31, 31, 31),
+                                color: Color.fromARGB(255, 31, 31, 31),
                               ),
                             ),
                             enabledBorder: UnderlineInputBorder(
                               borderSide: BorderSide(
-                                color:Color.fromARGB(255, 31, 31, 31),
+                                color: Color.fromARGB(255, 31, 31, 31),
                               ),
                             ),
                           ),
@@ -121,13 +245,14 @@ class _RegisterState extends State<Register> {
                         // height: 60,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8),
-                          color:Color.fromARGB(255, 31, 31, 31),
+                          color: Color.fromARGB(255, 31, 31, 31),
                         ),
                         padding: EdgeInsets.symmetric(
                           horizontal: 15,
                           vertical: 3,
                         ),
                         child: TextFormField(
+                          controller: _prenomController,
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 16,
@@ -145,12 +270,12 @@ class _RegisterState extends State<Register> {
                             ),
                             focusedBorder: UnderlineInputBorder(
                               borderSide: BorderSide(
-                               color: Color.fromARGB(255, 31, 31, 31),
+                                color: Color.fromARGB(255, 31, 31, 31),
                               ),
                             ),
                             enabledBorder: UnderlineInputBorder(
                               borderSide: BorderSide(
-                                color:Color.fromARGB(255, 31, 31, 31),
+                                color: Color.fromARGB(255, 31, 31, 31),
                               ),
                             ),
                           ),
@@ -171,13 +296,14 @@ class _RegisterState extends State<Register> {
                         // height: 60,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8),
-                          color:Color.fromARGB(255, 31, 31, 31),
+                          color: Color.fromARGB(255, 31, 31, 31),
                         ),
                         padding: EdgeInsets.symmetric(
                           horizontal: 15,
                           vertical: 3,
                         ),
                         child: TextFormField(
+                          controller: _emailController,
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 16,
@@ -195,12 +321,12 @@ class _RegisterState extends State<Register> {
                             ),
                             focusedBorder: UnderlineInputBorder(
                               borderSide: BorderSide(
-                               color: Color.fromARGB(255, 31, 31, 31),
+                                color: Color.fromARGB(255, 31, 31, 31),
                               ),
                             ),
                             enabledBorder: UnderlineInputBorder(
                               borderSide: BorderSide(
-                               color: Color.fromARGB(255, 31, 31, 31),
+                                color: Color.fromARGB(255, 31, 31, 31),
                               ),
                             ),
                           ),
@@ -221,13 +347,14 @@ class _RegisterState extends State<Register> {
                         // height: 60,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8),
-                          color:Color.fromARGB(255, 31, 31, 31),
+                          color: Color.fromARGB(255, 31, 31, 31),
                         ),
                         padding: EdgeInsets.symmetric(
                           horizontal: 15,
                           vertical: 3,
                         ),
                         child: TextFormField(
+                          controller: _passwordController,
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 16,
@@ -246,12 +373,12 @@ class _RegisterState extends State<Register> {
                             ),
                             focusedBorder: UnderlineInputBorder(
                               borderSide: BorderSide(
-                                color:Color.fromARGB(255, 31, 31, 31),
+                                color: Color.fromARGB(255, 31, 31, 31),
                               ),
                             ),
                             enabledBorder: UnderlineInputBorder(
                               borderSide: BorderSide(
-                                color:Color.fromARGB(255, 31, 31, 31),
+                                color: Color.fromARGB(255, 31, 31, 31),
                               ),
                             ),
                           ),
@@ -262,14 +389,14 @@ class _RegisterState extends State<Register> {
                       ),
                       Container(
                         child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Container(
                               width: double.infinity,
                               // height: 60,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8),
-                                color:Color.fromARGB(255, 31, 31, 31),
+                                color: Color.fromARGB(255, 31, 31, 31),
                               ),
                               padding: EdgeInsets.symmetric(
                                 horizontal: 15,
@@ -299,7 +426,7 @@ class _RegisterState extends State<Register> {
                                   ),
                                   enabledBorder: UnderlineInputBorder(
                                     borderSide: BorderSide(
-                                     color: Color.fromARGB(255, 31, 31, 31),
+                                      color: Color.fromARGB(255, 31, 31, 31),
                                     ),
                                   ),
                                 ),
@@ -328,9 +455,29 @@ class _RegisterState extends State<Register> {
                               height: 10,
                             ),
                             GestureDetector(
-                              onTap: () {},
+
+                              // onTap: () async {
+                              //   final message =
+                              //       await AuthService().registration(
+                              //     prenom: _prenomController.text,
+                              //     nom: _nomController.text,
+                              //     email: _emailController.text,
+                              //     password: _passwordController.text,
+                              //   );
+                              //   if (message!.contains('Success')) {
+                              //     Navigator.of(context).pushReplacement(
+                              //         MaterialPageRoute(
+                              //             builder: (context) => const Login()));
+                              //   }
+                              //   ScaffoldMessenger.of(context).showSnackBar(
+                              //     SnackBar(
+                              //       content: Text(message),
+                              //     ),
+                              //   );
+                              // },
+                              onTap: signUp,
                               child: Container(
-                                width: double.infinity,
+                                width: !_isLoading? double.infinity : 70,
                                 // height: 60,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(8),
@@ -340,14 +487,18 @@ class _RegisterState extends State<Register> {
                                   horizontal: 15,
                                   vertical: 16,
                                 ),
-                                child: Text(
-                                  "S'identifier",
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.white,
-                                  ),
-                                  textAlign: TextAlign.center,
-                                ),
+                                child: _isLoading // Condition pour afficher le CircularProgressIndicator ou le texte
+                        ? CircularProgressIndicator(
+                            valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                          )
+                        : Text(
+                            "S'inscrire",
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.white,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
                               ),
                             ),
                             const SizedBox(

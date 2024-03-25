@@ -1,251 +1,339 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:syncfusion_flutter_datepicker/datepicker.dart';
+import 'package:motion_toast/motion_toast.dart';
+import 'package:provider/provider.dart';
+import 'package:random_string/random_string.dart';
+import 'package:wareef/models/task.dart';
+import 'package:wareef/services/task_service.dart';
+import 'package:wareef/widgets/date_choice.dart';
 
-class editTask extends StatefulWidget {
-  const editTask({super.key});
+import '../widgets/motion_toast.dart';
+
+class EditTask extends StatefulWidget {
+  final Task task;
+
+  const EditTask({Key? key, required this.task}) : super(key: key);
 
   @override
-  State<editTask> createState() => _editTaskState();
+  State<EditTask> createState() => _EditTaskState();
 }
 
-class _editTaskState extends State<editTask> {
+class _EditTaskState extends State<EditTask> {
+  final _formKey = GlobalKey<FormState>();
+  final TextEditingController _taskNameController = TextEditingController();
+  final TextEditingController _taskDescriptionController =
+      TextEditingController();
+  final ValueNotifier<DateTime> _taskStartDateNotifier =
+      ValueNotifier<DateTime>(DateTime.now());
+  final ValueNotifier<DateTime> _taskEndDateNotifier =
+      ValueNotifier<DateTime>(DateTime.now());
+
+  void _submit() async {
+    if (_formKey.currentState!.validate()) {
+      _formKey.currentState!.save();
+      try {
+
+        await context.read<TaskService>().updateTask(Task(
+          taskId: widget.task.taskId,
+          taskTitle: _taskNameController.text.trim(),
+          taskDescription: _taskDescriptionController.text.trim(),
+          taskStartDate: _taskStartDateNotifier.value,
+          taskEndDate: _taskEndDateNotifier.value,
+        ));
+
+        MotionToast.success(
+          title: Text("Succès"),
+          description: Text("Tâche mise à jour avec succès"),
+        ).show(context);
+      } catch (e) {
+
+        MotionToast.error(
+          title: Text("Erreur"),
+          description: Text("Une erreur s'est produite lors de la mise à jour de la tâche"),
+        ).show(context);
+      }
+    }
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Container(
-          padding: EdgeInsets.only(
-            top: 45,
-            left: 15,
-            right: 15,
-          ),
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
+      appBar: AppBar(
+        title: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            GestureDetector(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child: Image.asset(
+                "images/Group 21.png",
+                color: Colors.white,
+              ),
+            ),
+            const Text(
+              "Modifier la tâche",
+              style: TextStyle(
+                fontSize: 20,
+                color: Colors.white,
+              ),
+            ),
+            Container(),
+          ],
+        ),
+        backgroundColor: const Color.fromARGB(255, 2, 137, 96),
+        automaticallyImplyLeading: false,
+      ),
+      body: Consumer<TaskService>(
+        builder: (context, value, child) => SafeArea(
+          child: ListView.builder(
+            itemBuilder: (context, index) => SingleChildScrollView(
+
+              child: Column(
                 children: [
-                  IconButton(
-                    icon: Icon(
-                      Icons.arrow_back,
-                      color: Color(0xFF028960),
-                    ),
-                    onPressed: () {
-                      // Navigator.pop(context);
-                    },
-                  ),
-                  SizedBox(width: 90), // Espacement entre l'icône et le texte
-                  Text(
-                    'Modification de la Tache',
-                    style: TextStyle(
-                      color: Color(0xFFFFFFFF),
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
+                  Form(
+                    // key: _formKey,
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      height: MediaQuery.of(context).size.height,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 15,
+                        ),
+                        // child: Form(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            const SizedBox(
+                              height: 70,
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  width: double.infinity,
+                                  // height: 60,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8),
+                                    color:
+                                        const Color.fromARGB(255, 31, 31, 31),
+                                  ),
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 15,
+                                    vertical: 3,
+                                  ),
+                                  child: TextFormField(
+                                    controller: _taskNameController,
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty) {
+                                        return "Ce champs est obligatoire";
+                                      }
+                                      return null;
+                                    },
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 16,
+                                    ),
+                                    decoration: InputDecoration(
+                                      contentPadding:
+                                          const EdgeInsets.symmetric(
+                                        vertical: 5,
+                                      ),
+                                      hintText: "${widget.task.taskTitle}" ,
+                                      label: Text(
+                                        'Nom',
+
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                      focusedBorder: const UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color:
+                                              Color.fromARGB(255, 31, 31, 31),
+                                        ),
+                                      ),
+                                      enabledBorder: const UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color:
+                                              Color.fromARGB(255, 31, 31, 31),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 20),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  width: double.infinity,
+                                  height: 160,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8),
+                                    color:
+                                        const Color.fromARGB(255, 31, 31, 31),
+                                  ),
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 15,
+                                    vertical: 3,
+                                  ),
+                                  child: TextFormField(
+                                    controller: _taskDescriptionController,
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty) {
+                                        return "Ce champ est obligatoire";
+                                      }
+                                      return null;
+                                    },
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 16,
+                                    ),
+                                    decoration: InputDecoration(
+                                      contentPadding:
+                                          const EdgeInsets.symmetric(
+                                        vertical: 5,
+                                      ),
+                                      hintText:  "${widget.task.taskDescription}",
+                                      label: Text(
+                                        "Description",
+
+                                        //"${value.tasks[index].taskDescription}",
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                      focusedBorder: const UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color:
+                                              Color.fromARGB(255, 31, 31, 31),
+                                        ),
+                                      ),
+                                      enabledBorder: const UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color:
+                                              Color.fromARGB(255, 31, 31, 31),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 36),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Column(
+                                  children: [
+                                    //debut
+                                    const Text(
+                                      'Date Debut',
+                                      style: TextStyle(
+                                        color: Color(0xFFFFFFFF),
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    Container(
+                                      // width: 180,
+                                      // height: 50,
+                                      decoration: const BoxDecoration(
+                                        color: Color.fromARGB(255, 30, 30, 30),
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(8.0),
+                                        ),
+                                      ),
+                                      child: DateChoice(
+                                          selectedDate: _taskStartDateNotifier,
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height -
+                                              290),
+                                    )
+                                  ],
+                                ),
+                                const SizedBox(
+                                  width: 30,
+                                ),
+                                //  SizedBox(width: 100,),
+                                Column(
+                                  children: [
+                                    //fin
+                                    const Text(
+                                      'Date Fin',
+                                      style: TextStyle(
+                                        color: Color(0xFFFFFFFF),
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    Container(
+                                      // width: 180,
+                                      // height: 50,
+                                      decoration: const BoxDecoration(
+                                        color: Color.fromARGB(255, 30, 30, 30),
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(8.0),
+                                        ),
+                                      ),
+                                      child: DateChoice(
+                                          selectedDate: _taskEndDateNotifier,
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height -
+                                              290),
+                                    )
+                                  ],
+                                )
+                              ],
+                            ),
+                            const SizedBox(height: 60),
+                            GestureDetector(
+                              onTap: _submit,
+                              child: Container(
+                                width: double.infinity,
+                                // height: 60,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8),
+                                  color: const Color.fromARGB(255, 2, 137, 96),
+                                ),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 15,
+                                  vertical: 16,
+                                ),
+                                child: const Text(
+                                  "Modifier la tâche",
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    color: Colors.white,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
                   ),
                 ],
               ),
-              SizedBox(
-                height: 60,
-              ),
-              Padding(
-                padding: EdgeInsets.all(0.0),
-                child: Form(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Nom Tache',
-                        style: TextStyle(
-                          color: Color(0xFFFFFFFF),
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      SizedBox(height: 8),
-                      TextFormField(
-                        decoration: InputDecoration(
-                          hintText: 'Devoir mathematique',
-                          hintStyle: TextStyle(
-                            color: Color(0xFFFFFFFF),
-                          ),
-                          labelStyle: TextStyle(
-                            color: Color(0xFFFFFFFF),
-                          ),
-                          // labelText: 'Nomm' ,
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8.0)),
-                          filled: true, // Permet de remplir le fond du champ
-                          fillColor: Color(0xFF1F1F1F),
-                        ),
-                      ),
-                      SizedBox(height: 16),
-                      Text(
-                        'Description',
-                        style: TextStyle(
-                          color: Color(0xFFFFFFFF),
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      SizedBox(height: 8),
-                      TextFormField(
-                        decoration: InputDecoration(
-                          hintText: 'waaaaaaaaaaaa leguiiiiiii nakkkkkkkkkkkk',
-                          hintStyle: TextStyle(
-                            color: Color(0xFFFFFFFF),
-                          ),
-                          labelStyle: TextStyle(
-                            color: Color(0xFFFFFFFF),
-                          ),
-                          //labelText: 'Description',
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8.0)),
-                          filled: true, // Permet de remplir le fond du champ
-                          fillColor: Color(0xFF1F1F1F),
-                        ),
-                        minLines: 4,
-                        keyboardType: TextInputType.multiline,
-                        maxLines: null,
-                      ),
-                      SizedBox(height: 36),
-                      Row(
-                        children: [
-                          Column(
-                            children: [
-                              //debut
-                              Text(
-                                'Date Debut',
-                                style: TextStyle(
-                                  color: Color(0xFFFFFFFF),
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Container(
-                                  width: 180,
-                                  height: 50,
-                                  decoration: BoxDecoration(
-                                    color: Color.fromARGB(255, 30, 30, 30),
-                                    borderRadius: const BorderRadius.all(
-                                      Radius.circular(8.0),
-                                    ),
-                                  ),
-                                  child: Row(
-                                    children: [
-                                      IconButton(
-                                        icon: Icon(
-                                          Icons.calendar_today,
-                                          color: Color(0xFFFFFFFF),
-                                        ),
-                                        onPressed: () {
-                                          //issakha ta logique ici
-                                        },
-                                      ),
-                                      Text(
-                                        '12-03-2024',
-                                        style: TextStyle(
-                                          color: Color(0xFFFFFFFF),
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ],
-                                  ))
-                            ],
-                          ),
-                          Spacer(),
-                          //  SizedBox(width: 100,),
-                          Column(
-                            children: [
-                              //fin
-                              Text(
-                                'Date Fin',
-                                style: TextStyle(
-                                  color: Color(0xFFFFFFFF),
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Container(
-                                  width: 180,
-                                  height: 50,
-                                  decoration: BoxDecoration(
-                                    color: Color.fromARGB(255, 30, 30, 30),
-                                    borderRadius: const BorderRadius.all(
-                                      Radius.circular(8.0),
-                                    ),
-                                  ),
-                                  child: Row(
-                                    children: [
-                                      IconButton(
-                                        icon: Icon(
-                                          Icons.calendar_today,
-                                          color: Color(0xFFFFFFFF),
-                                        ),
-                                        onPressed: () {
-                                          //issakha ta logique ici
-                                        },
-                                      ),
-                                      Text(
-                                        '12-03-2024',
-                                        style: TextStyle(
-                                          color: Color(0xFFFFFFFF),
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ],
-                                  ))
-                            ],
-                          )
-                        ],
-                      ),
-                      SizedBox(height: 60),
-                      SizedBox(
-                        width: double.infinity,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: const BorderRadius.all(
-                              Radius.circular(8.0),
-                            ),
-                          ),
-                          child: GestureDetector(
-                            onTap: () {},
-                            child: Container(
-                              width: double.infinity,
-                              // height: 60,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
-                                color: Color.fromARGB(255, 2, 137, 96),
-                              ),
-                              padding: EdgeInsets.symmetric(
-                                horizontal: 15,
-                                vertical: 16,
-                              ),
-                              child: Text(
-                                "Modifier",
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  color: Colors.white,
-                                ),
-                                textAlign: TextAlign.center,
-                              ),
-                            ),
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            ],
+            ),
           ),
         ),
       ),

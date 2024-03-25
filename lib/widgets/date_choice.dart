@@ -4,9 +4,11 @@ class DateChoice extends StatefulWidget {
   const DateChoice({
     super.key,
     required this.height,
+    required this.selectedDate,
   });
 
   final double height;
+  final ValueNotifier<DateTime> selectedDate;
 
   @override
   State<DateChoice> createState() => _DateChoiceState();
@@ -43,7 +45,7 @@ class _DateChoiceState extends State<DateChoice> {
                     padding: const EdgeInsets.all(12),
                     decoration: const BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(12)),
-                        color: Colors.teal),
+                        color: Color.fromARGB(255, 2, 137, 96)),
                     child: const Text(
                       'Confirmer',
                     ),
@@ -61,19 +63,20 @@ class _DateChoiceState extends State<DateChoice> {
       onTap: () => _selectDate(context),
       child: Container(
         alignment: Alignment.center,
-        height: 40,
+        height: 45,
         padding: const EdgeInsets.all(12),
         decoration: const BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(12)),
-            color: Colors.teal),
+            color: Color.fromARGB(255, 2, 137, 96)),
         child: Row(
           children: [
-            const Icon(Icons.calendar_month),
+            const Icon(Icons.access_time_outlined, color: Colors.white),
             const SizedBox(
               width: 5.0,
             ),
             Text(
               content,
+              style: const TextStyle(color: Colors.white),
             ),
           ],
         ),

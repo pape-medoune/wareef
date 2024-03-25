@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flame_splash_screen/flame_splash_screen.dart';
 import 'package:wareef/Pages/HomePage.dart';
 import 'package:another_flutter_splash_screen/another_flutter_splash_screen.dart';
+import 'package:wareef/Pages/OnBoardingIntro.dart';
 import 'package:wareef/auth/login.dart';
 
 class SplashScreenGame extends StatefulWidget {
@@ -67,7 +68,7 @@ class SplashScreenGameState extends State<SplashScreenGame> {
           ),
         ),
         onAnimationEnd: () => debugPrint("On Fade In End"),
-        nextScreen: const Login(),
+        nextScreen: const OnBoardingIntro(),
       ),
     );
   }
