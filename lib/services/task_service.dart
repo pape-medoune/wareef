@@ -19,6 +19,23 @@ class TaskService with ChangeNotifier {
     notifyListeners();
   }
 
+  Future<Task> getTaskDetails(String id) async {
+    DocumentSnapshot documentSnapshot = await firestore.collection('tasks').doc(id).get();
+    if (documentSnapshot.exists) {
+      return Task(
+        taskId: documentSnapshot.id,
+        taskTitle: documentSnapshot['title'],
+        taskDescription: documentSnapshot['description'],
+        taskStartDate: DateTime.parse(documentSnapshot['start_date']),
+        taskEndDate: DateTime.parse(documentSnapshot['end_date']),
+      );
+    } else {
+      throw Exception('Task not found');
+    }
+  }
+
+
+
   Stream<List<Task>> getTasks() {
     return firestore
         .collection('tasks')

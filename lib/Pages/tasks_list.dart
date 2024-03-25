@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:wareef/Pages/detail.dart';
+
 import 'package:wareef/Pages/edit_task.dart';
 import 'package:wareef/components/mini_card.dart';
 import 'package:wareef/services/task_service.dart';
 import 'package:wareef/widgets/motion_toast.dart';
+
+import 'Detail.dart';
 
 class TasksList extends StatefulWidget {
   const TasksList({super.key});
@@ -45,6 +47,7 @@ class _TasksListState extends State<TasksList>
             return ListView.builder(
               itemCount: value.tasks.length,
               itemBuilder: (context, index) {
+
                 return Column(
                   children: [
                     Padding(
@@ -58,12 +61,13 @@ class _TasksListState extends State<TasksList>
                                 children: [
                                   SlidableAction(
                                     onPressed: (context) {
+
                                       Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                const Detail(),
-                                          ));
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => Detail(task:value.tasks[index] ),
+                                        ),
+                                      );
                                     },
                                     backgroundColor: const Color(0xFF21B7CA),
                                     foregroundColor: Colors.white,
@@ -72,11 +76,13 @@ class _TasksListState extends State<TasksList>
                                   ),
                                   SlidableAction(
                                     onPressed: (context) {
+
                                       Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const EditTask()));
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => EditTask(task:value.tasks[index] ),
+                                        ),
+                                      );
                                     },
                                     backgroundColor: const Color(0xFF0392CF),
                                     foregroundColor: Colors.white,

@@ -2,8 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:wareef/services/task_service.dart';
 
+import '../models/task.dart';
+
 class Detail extends StatefulWidget {
-  const Detail({super.key});
+  final Task task; // Assurez-vous d'avoir une classe Task définie quelque part
+
+  const Detail({Key? key, required this.task}) : super(key: key);
 
   @override
   _DetailState createState() => _DetailState();
@@ -103,7 +107,8 @@ class _DetailState extends State<Detail> {
                                     ),
                                   ),
                                   Text(
-                                    "${value.tasks[index].taskTitle}",
+                                    "${widget.task.taskTitle}",
+                                   // "${value.tasks[index].taskTitle}",
                                     style: const TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.bold,
@@ -136,7 +141,7 @@ class _DetailState extends State<Detail> {
                                         CrossAxisAlignment.center,
                                     children: [
                                       Text(
-                                        "Description",
+                                        "",
                                         style: TextStyle(
                                           fontSize: 16,
                                           fontWeight: FontWeight.bold,
@@ -160,7 +165,8 @@ class _DetailState extends State<Detail> {
                                     ),
                                   ),
                                   Text(
-                                    "${value.tasks[index].taskDescription}",
+                                    "${widget.task.taskDescription}",
+                                    //"${value.tasks[index].taskDescription}",
                                     style: const TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.bold,
@@ -265,7 +271,7 @@ class _DetailState extends State<Detail> {
                                           height: 5.0,
                                         ),
                                         Text(
-                                          "${value.tasks[index].taskStartDate!.day} - ${value.tasks[index].taskEndDate!.month} - ${value.tasks[index].taskEndDate!.year}",
+                                          "${widget.task.taskStartDate!.day} - ${widget.task.taskStartDate!.month} - ${widget.task.taskStartDate!.year}",
                                           style: const TextStyle(
                                             fontSize: 16,
                                             fontWeight: FontWeight.bold,
@@ -328,7 +334,7 @@ class _DetailState extends State<Detail> {
                                           height: 5.0,
                                         ),
                                         Text(
-                                          "${value.tasks[index].taskEndDate!.day} - ${value.tasks[index].taskEndDate!.month} - ${value.tasks[index].taskEndDate!.year}",
+                                          "${widget.task.taskEndDate!.day} - ${widget.task.taskEndDate!.month} - ${widget.task.taskEndDate!.year}",
                                           style: const TextStyle(
                                             fontSize: 16,
                                             fontWeight: FontWeight.bold,

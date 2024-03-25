@@ -14,3 +14,4 @@ class Task {
       this.taskEndDate,
       this.completed = false});
 }
+

@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:motion_toast/motion_toast.dart';
 import 'package:provider/provider.dart';
 import 'package:random_string/random_string.dart';
 import 'package:wareef/models/task.dart';
 import 'package:wareef/services/task_service.dart';
 import 'package:wareef/widgets/date_choice.dart';
 
+import '../widgets/motion_toast.dart';
+
 class EditTask extends StatefulWidget {
-  const EditTask({super.key});
+  final Task task;
+
+  const EditTask({Key? key, required this.task}) : super(key: key);
 
   @override
   State<EditTask> createState() => _EditTaskState();
@@ -22,26 +27,38 @@ class _EditTaskState extends State<EditTask> {
   final ValueNotifier<DateTime> _taskEndDateNotifier =
       ValueNotifier<DateTime>(DateTime.now());
 
-  void _submit() {
-    var isValid = false;
-    var form = _formKey.currentState;
-    if (form != null) {
-      isValid = form.validate();
-    }
-    if (isValid) {
-      context.read<TaskService>().addTask(Task(
-            taskId: randomString(10),
-            taskTitle: _taskNameController.text.trim(),
-            taskDescription: _taskDescriptionController.text.trim(),
-            taskStartDate: _taskStartDateNotifier.value,
-            taskEndDate: _taskEndDateNotifier.value,
-          ));
-      // print(Task().taskStartDate);
+  void _submit() async {
+    if (_formKey.currentState!.validate()) {
+      _formKey.currentState!.save();
+      try {
+
+        await context.read<TaskService>().updateTask(Task(
+          taskId: widget.task.taskId,
+          taskTitle: _taskNameController.text.trim(),
+          taskDescription: _taskDescriptionController.text.trim(),
+          taskStartDate: _taskStartDateNotifier.value,
+          taskEndDate: _taskEndDateNotifier.value,
+        ));
+
+        MotionToast.success(
+          title: Text("Succès"),
+          description: Text("Tâche mise à jour avec succès"),
+        ).show(context);
+      } catch (e) {
+
+        MotionToast.error(
+          title: Text("Erreur"),
+          description: Text("Une erreur s'est produite lors de la mise à jour de la tâche"),
+        ).show(context);
+      }
     }
   }
 
+
+
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         title: Row(
@@ -74,6 +91,7 @@ class _EditTaskState extends State<EditTask> {
         builder: (context, value, child) => SafeArea(
           child: ListView.builder(
             itemBuilder: (context, index) => SingleChildScrollView(
+
               child: Column(
                 children: [
                   Form(
@@ -124,8 +142,10 @@ class _EditTaskState extends State<EditTask> {
                                           const EdgeInsets.symmetric(
                                         vertical: 5,
                                       ),
+                                      hintText: "${widget.task.taskTitle}" ,
                                       label: Text(
-                                        "${value.tasks[index].taskTitle}",
+                                        'Nom',
+
                                         style: const TextStyle(
                                           color: Colors.white,
                                           fontSize: 16,
@@ -181,8 +201,11 @@ class _EditTaskState extends State<EditTask> {
                                           const EdgeInsets.symmetric(
                                         vertical: 5,
                                       ),
+                                      hintText:  "${widget.task.taskDescription}",
                                       label: Text(
-                                        "${value.tasks[index].taskDescription}",
+                                        "Description",
+
+                                        //"${value.tasks[index].taskDescription}",
                                         style: const TextStyle(
                                           color: Colors.white,
                                           fontSize: 16,
