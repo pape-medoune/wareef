@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         scaffoldBackgroundColor: Color(0x00020206),
       ),
-      home: HomePage(),
+      home: IntroPage(),
       routes: {
         "/home": (_) => HomePage(),
         "/login": (_) => Login(),

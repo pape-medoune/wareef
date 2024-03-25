@@ -60,9 +60,12 @@ void dispose()
   super.dispose();
 }
 
-
+bool _isLoading =false;
 Future signUp() async {
  try {
+  setState(() {
+        _isLoading = true; // Mettre à jour l'état de chargement
+      });
     UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
       email: _emailController.text.trim(),
       password: _passwordController.text.trim(),
@@ -111,7 +114,11 @@ Future signUp() async {
         );
       },
     );
- }
+ }finally {
+      setState(() {
+        _isLoading = false; // Mettre à jour l'état de chargement
+      });
+    }
 }
 
 
@@ -382,7 +389,7 @@ Future addUserDetails(String prenom, String nom, String email, String uid_person
                       ),
                       Container(
                         child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Container(
                               width: double.infinity,
@@ -470,7 +477,7 @@ Future addUserDetails(String prenom, String nom, String email, String uid_person
                               // },
                               onTap: signUp,
                               child: Container(
-                                width: double.infinity,
+                                width: !_isLoading? double.infinity : 70,
                                 // height: 60,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(8),
@@ -480,14 +487,18 @@ Future addUserDetails(String prenom, String nom, String email, String uid_person
                                   horizontal: 15,
                                   vertical: 16,
                                 ),
-                                child: Text(
-                                  "S'inscrire",
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.white,
-                                  ),
-                                  textAlign: TextAlign.center,
-                                ),
+                                child: _isLoading // Condition pour afficher le CircularProgressIndicator ou le texte
+                        ? CircularProgressIndicator(
+                            valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                          )
+                        : Text(
+                            "S'inscrire",
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.white,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
                               ),
                             ),
                             const SizedBox(
