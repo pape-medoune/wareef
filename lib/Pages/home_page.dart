@@ -304,7 +304,9 @@ class _HomePageState extends State<HomePage>
                                     child: const MiniCard(
                                         title: "Examen ",
                                         subtitle: "15 Mai",
-                                        select: true)),
+                                        select: true,
+                                        sideColor :Color.fromARGB(255, 215, 240, 255)
+                                    )),
                               ],
                             ),
                             const SizedBox(
@@ -316,6 +318,7 @@ class _HomePageState extends State<HomePage>
                                   title: "Devoir ",
                                   subtitle: "5 Mai",
                                   select: false,
+                                    sideColor :Color.fromARGB(255, 215, 240, 255)
                                 ),
                                 SizedBox(
                                   height: 15,
@@ -324,6 +327,7 @@ class _HomePageState extends State<HomePage>
                                   title: "Apprendre Leçon ",
                                   subtitle: "17 Mars",
                                   select: true,
+                                    sideColor :Color.fromARGB(255, 215, 240, 255)
                                 ),
                               ],
                             ),

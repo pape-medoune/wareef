@@ -314,7 +314,8 @@ class _TaskListState extends State<TaskList>
                                         child: const MiniCard(
                                             title: "Examen ",
                                             subtitle: "15 Mai",
-                                            select: true)),
+                                            select: true,
+                                            sideColor :Color.fromARGB(255, 215, 240, 255))),
                                   ],
                                 ),
                                 const SizedBox(
@@ -326,6 +327,7 @@ class _TaskListState extends State<TaskList>
                                       title: "Devoir ",
                                       subtitle: "5 Mai",
                                       select: false,
+                                        sideColor :Color.fromARGB(255, 215, 240, 255)
                                     ),
                                     SizedBox(
                                       height: 15,
@@ -334,6 +336,7 @@ class _TaskListState extends State<TaskList>
                                       title: "Apprendre Leçon ",
                                       subtitle: "17 Mars",
                                       select: true,
+                                        sideColor :Color.fromARGB(255, 215, 240, 255),
                                     ),
                                   ],
                                 ),

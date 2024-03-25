@@ -5,11 +5,14 @@ class MiniCard extends StatefulWidget {
   final String title;
   final String subtitle;
   final bool select;
+  final Color sideColor;
   const MiniCard(
       {super.key,
       required this.title,
       required this.subtitle,
-      required this.select});
+      required this.select,
+      required this.sideColor,
+      });
 
   @override
   _MiniCardState createState() => _MiniCardState();
@@ -23,7 +26,7 @@ class _MiniCardState extends State<MiniCard> {
     Icons.circle_outlined,
     color: Colors.white,
   );
-  Color _sideColor = const Color.fromARGB(255, 215, 240, 255);
+  Color _sideColor =  Colors.red;
   bool _terminated = false;
 
   void _marquedAsTerminated() {
@@ -33,14 +36,15 @@ class _MiniCardState extends State<MiniCard> {
         _terminated = false;
         _sideColor = const Color.fromARGB(255, 215, 240, 255);
       } else {
-        _iconCheck = const Icon(Icons.check_circle, color: Colors.green);
+        _iconCheck = const Icon(Icons.check_circle, color: Colors.deepPurpleAccent);
         _terminated = true;
-        _sideColor = Colors.green;
+        _sideColor = Colors.deepPurpleAccent;
         displaySuccessMotionToast(
-            context, "Bravo! Vous avez terminé une tâche");
+            context, " Vous avez demaré une tâche");
       }
     });
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -86,14 +90,15 @@ class _MiniCardState extends State<MiniCard> {
               trailing: IconButton(
                 onPressed: _marquedAsTerminated,
                 icon: _iconCheck,
-              )),
+              )
+              ),
         ),
         Positioned(
           child: Container(
             width: 15,
             height: 72,
             decoration: BoxDecoration(
-              color: _sideColor,
+              color: _terminated ? _sideColor : widget.sideColor,
               borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(8),
                 bottomLeft: Radius.circular(8),

@@ -202,11 +202,11 @@ class _DetailState extends State<Detail> {
                                       20,
                                     ),
                                   ),
-                                  child: const Text(
-                                    "Terminé",
+                                  child: Text(
+                                    widget.task.completed ? "Terminé" : "Pas accomplis",
                                     style: TextStyle(
                                       fontSize: 16,
-                                      color: Colors.white,
+                                      color: widget.task.completed ? Colors.white : Colors.red,
                                     ),
                                   ),
                                 ),
