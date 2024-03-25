@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:motion_toast/motion_toast.dart';
 import 'package:provider/provider.dart';
-import 'package:random_string/random_string.dart';
+import 'package:wareef/Pages/tasks_list.dart';
 import 'package:wareef/models/task.dart';
 import 'package:wareef/services/task_service.dart';
 import 'package:wareef/widgets/date_choice.dart';
-
-import '../widgets/motion_toast.dart';
+import 'package:wareef/widgets/motion_toast.dart';
 
 class EditTask extends StatefulWidget {
   final Task task;
 
-  const EditTask({Key? key, required this.task}) : super(key: key);
+  const EditTask({super.key, required this.task});
 
   @override
   State<EditTask> createState() => _EditTaskState();
@@ -31,32 +29,37 @@ class _EditTaskState extends State<EditTask> {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
       try {
-
         await context.read<TaskService>().updateTask(Task(
-          taskId: widget.task.taskId,
-          taskTitle: _taskNameController.text.trim(),
-          taskDescription: _taskDescriptionController.text.trim(),
-          taskStartDate: _taskStartDateNotifier.value,
-          taskEndDate: _taskEndDateNotifier.value,
-        ));
-        MotionToast.success(
-          title: Text("Succès"),
-          description: Text("Tâche mise à jour avec succès"),
-        ).show(context);
+              taskId: widget.task.taskId,
+              taskTitle: _taskNameController.text.trim(),
+              taskDescription: _taskDescriptionController.text.trim(),
+              taskStartDate: _taskStartDateNotifier.value,
+              taskEndDate: _taskEndDateNotifier.value,
+            ));
+        displaySuccessMotionToast(context, 'Tâche modifiée avec succés');
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const TasksList(),
+            ));
       } catch (e) {
-        MotionToast.error(
-          title: Text("Erreur"),
-          description: Text("Une erreur s'est produite lors de la mise à jour de la tâche"),
-        ).show(context);
+        displayErrorMotionToast(context,
+            "Une erreur s'est produite lors de la mise à jour de la tâche");
       }
     }
   }
 
-
+  @override
+  void initState() {
+    super.initState();
+    _taskNameController.text = widget.task.taskTitle!;
+    _taskDescriptionController.text = widget.task.taskDescription!;
+    _taskStartDateNotifier.value = widget.task.taskStartDate!;
+    _taskEndDateNotifier.value = widget.task.taskEndDate!;
+  }
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         title: Row(
@@ -88,12 +91,12 @@ class _EditTaskState extends State<EditTask> {
       body: Consumer<TaskService>(
         builder: (context, value, child) => SafeArea(
           child: ListView.builder(
+            itemCount: 1,
             itemBuilder: (context, index) => SingleChildScrollView(
-
               child: Column(
                 children: [
                   Form(
-                   // key:_formKey,
+                    key: _formKey,
                     child: SizedBox(
                       width: MediaQuery.of(context).size.width,
                       height: MediaQuery.of(context).size.height,
@@ -140,11 +143,10 @@ class _EditTaskState extends State<EditTask> {
                                           const EdgeInsets.symmetric(
                                         vertical: 5,
                                       ),
-                                      hintText: "${widget.task.taskTitle}" ,
-                                      label: Text(
+                                      hintText: "${widget.task.taskTitle}",
+                                      label: const Text(
                                         'Nom',
-
-                                        style: const TextStyle(
+                                        style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 16,
                                         ),
@@ -199,12 +201,13 @@ class _EditTaskState extends State<EditTask> {
                                           const EdgeInsets.symmetric(
                                         vertical: 5,
                                       ),
-                                      hintText:  "${widget.task.taskDescription}",
-                                      label: Text(
+                                      hintText:
+                                          "${widget.task.taskDescription}",
+                                      label: const Text(
                                         "Description",
 
                                         //"${value.tasks[index].taskDescription}",
-                                        style: const TextStyle(
+                                        style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 16,
                                         ),
