@@ -7,6 +7,7 @@ import 'package:wareef/Pages/addTask.dart';
 
 
 import 'package:crystal_navigation_bar/crystal_navigation_bar.dart';
+import 'package:wareef/Pages/tasks_list.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -19,7 +20,8 @@ class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
  List <Widget> _screen = [
     Accueil(),
-    addTask(),
+    AddTask(),
+    TasksList(),
 ];int _selectedIndex = 0;
   Widget build(BuildContext context) {
     return Scaffold( 

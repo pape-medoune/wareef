@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:wareef/Pages/tasks_list.dart';
 import 'package:wareef/components/MiniCard.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 class Accueil extends StatefulWidget {
@@ -220,13 +221,24 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
                                     fontSize: 18,
                                   ),
                                 ),
-                                Text(
-                                  "Voir tout",
-                                  style: TextStyle(
-                                    color: Color.fromARGB(255, 186, 131, 222),
-                                    fontSize: 18,
-                                  ),
-                                ),
+                                GestureDetector(
+                                      onTap: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const TasksList(),
+                                            ));
+                                      },
+                                      child: const Text(
+                                        "Voir toutes",
+                                        style: TextStyle(
+                                          color: Color.fromARGB(
+                                              255, 186, 131, 222),
+                                          fontSize: 18,
+                                        ),
+                                      ),
+                                    ),
                               ],
                             ),
                             const SizedBox(
@@ -311,13 +323,24 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
                                     fontSize: 18,
                                   ),
                                 ),
-                                Text(
-                                  "Voir tout",
-                                  style: TextStyle(
-                                    color: Color.fromARGB(255, 186, 131, 222),
-                                    fontSize: 18,
-                                  ),
-                                ),
+                                GestureDetector(
+                                      onTap: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const TasksList(),
+                                            ));
+                                      },
+                                      child: const Text(
+                                        "Voir toutes",
+                                        style: TextStyle(
+                                          color: Color.fromARGB(
+                                              255, 186, 131, 222),
+                                          fontSize: 18,
+                                        ),
+                                      ),
+                                    ),
                               ],
                             ),
                             const SizedBox(
@@ -416,13 +439,24 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
                                     fontSize: 18,
                                   ),
                                 ),
-                                Text(
-                                  "Voir tout",
-                                  style: TextStyle(
-                                    color: Color.fromARGB(255, 186, 131, 222),
-                                    fontSize: 18,
-                                  ),
-                                ),
+                                GestureDetector(
+                                      onTap: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const TasksList(),
+                                            ));
+                                      },
+                                      child: const Text(
+                                        "Voir toutes",
+                                        style: TextStyle(
+                                          color: Color.fromARGB(
+                                              255, 186, 131, 222),
+                                          fontSize: 18,
+                                        ),
+                                      ),
+                                    ),
                               ],
                             ),
                             const SizedBox(
