@@ -39,13 +39,11 @@ class _EditTaskState extends State<EditTask> {
           taskStartDate: _taskStartDateNotifier.value,
           taskEndDate: _taskEndDateNotifier.value,
         ));
-
         MotionToast.success(
           title: Text("Succès"),
           description: Text("Tâche mise à jour avec succès"),
         ).show(context);
       } catch (e) {
-
         MotionToast.error(
           title: Text("Erreur"),
           description: Text("Une erreur s'est produite lors de la mise à jour de la tâche"),
@@ -95,7 +93,7 @@ class _EditTaskState extends State<EditTask> {
               child: Column(
                 children: [
                   Form(
-                    // key: _formKey,
+                   // key:_formKey,
                     child: SizedBox(
                       width: MediaQuery.of(context).size.width,
                       height: MediaQuery.of(context).size.height,

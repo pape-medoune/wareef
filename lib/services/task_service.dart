@@ -5,6 +5,7 @@ import 'package:wareef/models/task.dart';
 class TaskService with ChangeNotifier {
   List<Task> tasks = [];
 
+
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   addTask(Task task) async {
     await firestore.collection("tasks").add({
@@ -67,6 +68,7 @@ class TaskService with ChangeNotifier {
 
   Future<void> deleteTask(String id) async {
     await firestore.collection('tasks').doc(id).delete();
+    tasks.removeWhere((task) => task.taskId == id);
     notifyListeners();
   }
 
