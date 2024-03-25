@@ -61,7 +61,7 @@ class _TaskListState extends State<TaskList>
       body: Consumer<TaskService>(
         builder: (context, value, child) {
           return ListView.builder(
-            itemCount: 3,
+            itemCount: 1,
             itemBuilder: (context, index) {
               return SafeArea(
                   child: SizedBox(
