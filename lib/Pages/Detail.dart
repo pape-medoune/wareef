@@ -29,7 +29,7 @@ class _DetailState extends State<Detail> {
                     Navigator.of(context).pop();
                   },
                   child: Image.asset(
-                    "assets/images/Group 21.png",
+                    "images/Group 21.png",
                     color: Colors.white,
                   ),
                 ),

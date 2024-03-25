@@ -70,7 +70,7 @@ class _EditTaskState extends State<EditTask> {
                 Navigator.pop(context);
               },
               child: Image.asset(
-                "assets/images/Group 21.png",
+                "images/Group 21.png",
                 color: Colors.white,
               ),
             ),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart'; 
 import 'package:provider/provider.dart';
 import 'package:random_string/random_string.dart';
+import 'package:wareef/Pages/Accueil.dart';
+import 'package:wareef/core.dart';
 import 'package:wareef/models/task.dart';
 import 'package:wareef/services/task_service.dart';
 import 'package:wareef/widgets/date_choice.dart';
@@ -43,7 +45,11 @@ class _AddTaskState extends State<AddTask> {
       _taskNameController.clear();
       _taskDescriptionController.clear();
       displaySuccessMotionToast(context, 'Tâche ajoutée avec succés');
-      Navigator.pop(context);
+       Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const HomePage(),
+                ));
     } else {
       displayErrorMotionToast(context, 'Les champs sont obligatoires');
     }
@@ -62,7 +68,7 @@ class _AddTaskState extends State<AddTask> {
                 Navigator.pop(context);
               },
               child: Image.asset(
-                "assets/images/Group 21.png",
+                "images/Group 21.png",
                 color: Colors.white,
               ),
             ),

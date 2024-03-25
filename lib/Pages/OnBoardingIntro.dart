@@ -140,7 +140,7 @@ class _OnBoardingIntroState extends State<OnBoardingIntro> {
                   height: 20,
                 ),
                 Text(
-                  'Avec Samay SAS, suivre, planifier, ... mes tâches avec beaucoup plus de facilité',
+                  'Avec WAREEF, suivre, planifier, ... mes tâches avec beaucoup plus de facilité',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Colors.white,
