@@ -65,8 +65,9 @@ class TaskService with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> deleteTask(String id) async {
+ Future<void> deleteTask(String id) async {
     await firestore.collection('tasks').doc(id).delete();
+    tasks.removeWhere((task) => task.taskId == id);
     notifyListeners();
   }
 
