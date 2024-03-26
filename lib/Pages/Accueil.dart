@@ -246,7 +246,7 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
                               ],
                             ),
                             const SizedBox(
-                              height: 15,
+                              height: 8,
                             ),
                             Container(
                               decoration: BoxDecoration(
@@ -349,133 +349,108 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
                             const SizedBox(
                               height: 15,
                             ),
-                            Column(
-                              children: [
-                                Consumer<TaskService>(
-                                  builder: (context, value, child) {
-                                    return ListView.builder(
-                                      shrinkWrap: true,
-                                      itemCount: value.tasks.length,
-                                      itemBuilder: (context, index) {
-                                        return Padding(
-                                          padding: const EdgeInsets.all(12.0),
-                                          child: Column(
-                                            children: [
-                                              const SizedBox(height: 12),
-                                              Slidable(
-                                                key: const ValueKey(0),
-                                                endActionPane: ActionPane(
-                                                  motion: const ScrollMotion(),
-                                                  children: [
-                                                    SlidableAction(
-                                                      onPressed: (context) {
-                                                        Navigator.push(
-                                                          context,
-                                                          MaterialPageRoute(
-                                                            builder: (context) =>
-                                                                Detail(
-                                                                    task: value
-                                                                            .tasks[
-                                                                        index]),
-                                                          ),
-                                                        );
-                                                      },
-                                                      backgroundColor:
-                                                          const Color(
-                                                              0xFF21B7CA),
-                                                      foregroundColor:
-                                                          Colors.white,
-                                                      icon: Icons.info_outline,
-                                                      label: 'Detail',
-                                                    ),
-                                                    SlidableAction(
-                                                      onPressed: (context) {
-                                                        Navigator.push(
-                                                          context,
-                                                          MaterialPageRoute(
-                                                            builder: (context) =>
-                                                                EditTask(
-                                                                    task: value
-                                                                            .tasks[
-                                                                        index]),
-                                                          ),
-                                                        );
-                                                      },
-                                                      backgroundColor:
-                                                          const Color(
-                                                              0xFF0392CF),
-                                                      foregroundColor:
-                                                          Colors.white,
-                                                      icon: Icons.edit,
-                                                      label: 'Modifier',
-                                                    ),
-                                                    SlidableAction(
-                                                      onPressed: (context) {
-                                                        Provider.of<TaskService>(
-                                                                context,
-                                                                listen: false)
-                                                            .deleteTask(value
-                                                                .tasks[index]
-                                                                .taskId);
-                                                        // Afficher une notification ou un toast
-                                                      },
-                                                      backgroundColor:
-                                                          const Color(
-                                                              0xFFFE4A49),
-                                                      foregroundColor:
-                                                          Colors.white,
-                                                      icon: Icons.delete,
-                                                      label: 'Supprimer',
-                                                    ),
-                                                  ],
-                                                ),
-                                                child: Row(
-                                                  children: [
-                                                    Checkbox(
-                                                      value: value.tasks[index]
-                                                          .completed,
-                                                      onChanged:
-                                                          (bool? newValue) {
-                                                        Provider.of<TaskService>(
-                                                                context,
-                                                                listen: false)
-                                                            .updateTask(
-                                                          value.tasks[index]
-                                                              .copyWith(
-                                                            completed:
-                                                                newValue ??
-                                                                    false,
-                                                          ),
-                                                        );
-                                                      },
-                                                    ),
-                                                    Expanded(
-                                                      child: MiniCard(
-                                                        title:
-                                                            "${value.tasks[index].taskTitle}",
-                                                        subtitle:
-                                                            '${value.tasks[index].taskStartDate!.day} - ${value.tasks[index].taskStartDate!.month} - ${value.tasks[index].taskStartDate!.year}',
-                                                        select: true,
-                                                        sideColor: value
-                                                                .tasks[index]
-                                                                .completed
-                                                            ? Colors.green
-                                                            : Colors
-                                                                .yellowAccent, // Passage de la couleur sideColor
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        );
-                                      },
-                                    );
-                                  },
-                                ),
-                              ],
-                            ),
+
+                           Column(
+                             children: [
+                               Consumer<TaskService>(
+                                 builder: (context, value, child) {
+                                   return ListView.builder(
+                                     shrinkWrap: true,
+                                     itemCount: value.tasks.length,
+                                     itemBuilder: (context, index) {
+                                       return Padding(
+                                         padding: const EdgeInsets.all(12.0),
+                                         child: Column(
+                                           children: [
+                                             const SizedBox(height: 12),
+                                             Slidable(
+                                               key: const ValueKey(0),
+                                               endActionPane: ActionPane(
+                                                 motion: const ScrollMotion(),
+                                                 children: [
+                                                   SlidableAction(
+                                                     onPressed: (context) {
+                                                       Navigator.push(
+                                                         context,
+                                                         MaterialPageRoute(
+                                                           builder: (context) =>
+                                                               Detail(task: value.tasks[index]),
+                                                         ),
+                                                       );
+                                                     },
+                                                     backgroundColor: const Color(0xFF21B7CA),
+                                                     foregroundColor: Colors.white,
+                                                     icon: Icons.info_outline,
+                                                     label: 'Detail',
+                                                   ),
+                                                   SlidableAction(
+                                                     onPressed: (context) {
+                                                       Navigator.push(
+                                                         context,
+                                                         MaterialPageRoute(
+                                                           builder: (context) =>
+                                                               EditTask(task: value.tasks[index]),
+                                                         ),
+                                                       );
+                                                     },
+                                                     backgroundColor: const Color(0xFF0392CF),
+                                                     foregroundColor: Colors.white,
+                                                     icon: Icons.edit,
+                                                     label: 'Modifier',
+                                                   ),
+                                                   SlidableAction(
+                                                     onPressed: (context) {
+                                                       Provider.of<TaskService>(context, listen: false)
+                                                           .deleteTask(value.tasks[index].taskId);
+                                                       // Afficher une notification ou un toast
+                                                     },
+                                                     backgroundColor: const Color(0xFFFE4A49),
+                                                     foregroundColor: Colors.white,
+                                                     icon: Icons.delete,
+                                                     label: 'Supprimer',
+                                                   ),
+                                                 ],
+                                               ),
+                                               child: Row(
+                                                 children: [
+                                                   Checkbox(
+                                                     value: value.tasks[index].completed,
+                                                     onChanged: (bool? newValue) {
+                                                       Provider.of<TaskService>(context, listen: false)
+                                                           .updateTask(
+                                                         value.tasks[index].copyWith(
+                                                           completed: newValue ?? false,
+                                                         ),
+                                                       );
+                                                     },
+                                                   ),
+                                                   Expanded(
+                                                     child: MiniCard(
+                                                       title: "${value.tasks[index].taskTitle}",
+                                                       subtitle:
+                                                       '${value.tasks[index].taskStartDate!.day} - ${value.tasks[index].taskStartDate!.month} - ${value.tasks[index].taskStartDate!.year}',
+                                                       select: true,
+                                                       sideColor: value.tasks[index].completed
+                                                           ? Colors.green
+                                                           : Colors
+                                                           .yellowAccent, // Passage de la couleur sideColor
+                                                     ),
+                                                   ),
+                                                 ],
+                                               ),
+                                             ),
+                                           ],
+                                         ),
+                                       );
+                                     },
+                                   );
+                                 },
+                               ),
+                           ]
+                             ,)
+
+,
+
                             const SizedBox(
                               height: 15,
                             ),
