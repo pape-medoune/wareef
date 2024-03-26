@@ -23,7 +23,7 @@ class _MiniCardState extends State<MiniCard> {
   late String subtitle = "";
   late bool select = true;
   Icon _iconCheck = const Icon(
-    Icons.circle_outlined,
+    Icons.play_arrow,
     color: Colors.white,
   );
   Color _sideColor =  Colors.red;
@@ -32,11 +32,11 @@ class _MiniCardState extends State<MiniCard> {
   void _marquedAsTerminated() {
     setState(() {
       if (_terminated) {
-        _iconCheck = const Icon(Icons.circle_outlined, color: Colors.white);
+        _iconCheck = const Icon(Icons.play_arrow, color: Colors.white);
         _terminated = false;
         _sideColor = const Color.fromARGB(255, 215, 240, 255);
       } else {
-        _iconCheck = const Icon(Icons.check_circle, color: Colors.deepPurpleAccent);
+        _iconCheck = const Icon(Icons.stop, color: Colors.deepPurpleAccent);
         _terminated = true;
         _sideColor = Colors.deepPurpleAccent;
         displaySuccessMotionToast(
