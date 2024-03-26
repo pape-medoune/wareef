@@ -6,7 +6,6 @@ import 'package:wareef/Pages/tasks_list.dart';
 import 'package:wareef/components/MiniCard.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:provider/provider.dart';
-
 import '../services/task_service.dart';
 import 'Detail.dart';
 import 'editTask.dart';
@@ -30,16 +29,14 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
     await FirebaseFirestore.instance
         .collection('users')
         .get()
-        .then((value) =>
-        value.docs.forEach((element) {
-          usersId.add(element.reference.id);
-        }));
+        .then((value) => value.docs.forEach((element) {
+      usersId.add(element.reference.id);
+    }));
   }
 
   String userPrenom = '';
   String userNom = '';
   bool isLoading = true;
-
   @override
   void initState() {
     super.initState();
@@ -98,414 +95,376 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        key: _scaffoldKey,
-        body: Consumer<TaskService>(
-            builder: (context, value, child) {
-              return ListView.builder(
-                  itemCount: 3,
-                  itemBuilder: (context, index) {
-                    return SafeArea(
-                      child: SingleChildScrollView(
-                        child: Container(
-                          width: MediaQuery
-                              .of(context)
-                              .size
-                              .width,
-                          height: MediaQuery
-                              .of(context)
-                              .size
-                              .height,
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 20,
+      key: _scaffoldKey,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: 20,
+              ),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Bonjour $userPrenom',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 25,
+                              fontWeight: FontWeight.bold,
                             ),
-                            child: Column(
-                              children: [
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment
-                                      .spaceBetween,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Column(
-                                      crossAxisAlignment: CrossAxisAlignment
-                                          .start,
-                                      children: [
-                                        Text(
-                                          'Bonjour $userPrenom',
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 25,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                        Text(
-                                          "Bienvenue dans l'application ${value.tasks.length}",
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.normal,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    GestureDetector(
-                                      onTap: () {
-                                        _scaffoldKey.currentState?.openDrawer();
-                                      },
-                                      child: Container(
-                                        padding: EdgeInsets.all(12),
-                                        decoration: BoxDecoration(
-                                          color: Color.fromARGB(
-                                              255, 186, 131, 222),
-                                          borderRadius: BorderRadius.circular(
-                                            8,
-                                          ),
-                                        ),
-                                        child: Icon(
-                                          Icons.menu_open_sharp,
-                                          size: 30,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(
-                                  height: 15,
-                                ),
-                                Row(
-                                  children: [
-                                    Container(
-                                      width: MediaQuery
-                                          .of(context)
-                                          .size
-                                          .width - 40,
-                                      decoration: BoxDecoration(
-                                        color: Color.fromARGB(255, 30, 30, 30),
-                                        borderRadius: const BorderRadius.all(
-                                          Radius.circular(12.0),
-                                        ),
-                                        border: Border.all(
-                                          width: 1.0,
-                                          color: Color.fromARGB(
-                                              255, 30, 30, 30),
-                                        ),
-                                      ),
-                                      child: Row(
-                                        children: [
-                                          const Padding(
-                                            padding: EdgeInsets.symmetric(
-                                              horizontal: 8.0,
-                                              vertical: 15.0,
-                                            ),
-                                            child: Icon(
-                                              Icons.search,
-                                              color: Colors.white,
-                                              size: 30,
-                                            ),
-                                          ),
-                                          Expanded(
-                                            child: TextFormField(
-                                              initialValue: null,
-                                              decoration: const InputDecoration
-                                                  .collapsed(
-                                                filled: true,
-                                                fillColor: Color.fromARGB(
-                                                    255, 30, 30, 30),
-                                                hoverColor: Colors.transparent,
-                                                hintText: "Rechercher vos tâches",
-                                                hintStyle: TextStyle(
-                                                  color: Colors.white,
-                                                ),
-                                              ),
-                                              onFieldSubmitted: (value) {},
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(
-                                  height: 20,
-                                ),
-                                Container(
-                                  width: double.infinity,
-                                  // decoration: BoxDecoration(color:Colors.deepPurple,),
-                                  height: MediaQuery
-                                      .of(context)
-                                      .size
-                                      .height - 200,
-                                  child: ListView(
-                                    scrollDirection: Axis.vertical,
-                                    children: [
-                                      Column(
-                                        children: [
-                                          Row(
-                                            mainAxisAlignment: MainAxisAlignment
-                                                .spaceBetween,
-                                            crossAxisAlignment: CrossAxisAlignment
-                                                .center,
-                                            children: [
-                                              Text(
-                                                "Progression",
-                                                style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 18,
-                                                ),
-                                              ),
-                                              GestureDetector(
-                                                onTap: () {
-                                                  Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                        builder: (context) =>
-                                                        const TasksList(),
-                                                      ));
-                                                },
-                                                child: const Text(
-                                                  "Voir toutes",
-                                                  style: TextStyle(
-                                                    color: Color.fromARGB(
-                                                        255, 186, 131, 222),
-                                                    fontSize: 18,
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          const SizedBox(
-                                            height: 15,
-                                          ),
-                                          Container(
-                                            decoration: BoxDecoration(
-                                                color: Color.fromARGB(
-                                                    255, 24, 24, 24),
-                                                borderRadius: BorderRadius
-                                                    .circular(
-                                                    8.0)),
-                                            child: Padding(
-                                              padding: EdgeInsets.all(10.0),
-                                              child: Column(
-                                                crossAxisAlignment: CrossAxisAlignment
-                                                    .start,
-                                                children: [
-                                                  Text(
-                                                    "Daily task",
-                                                    style: TextStyle(
-                                                        fontSize: 18,
-                                                        color: Colors.white),
-                                                  ),
-                                                  Text(
-                                                    "2/3 task completed",
-                                                    style: TextStyle(
-                                                      fontSize: 16,
-                                                      color: const Color
-                                                          .fromARGB(
-                                                          186, 255, 255, 255),
-                                                    ),
-                                                  ),
-                                                  Row(
-                                                    mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                    crossAxisAlignment:
-                                                    CrossAxisAlignment.center,
-                                                    children: [
-                                                      Text(
-                                                        "You are almost done go ahead",
-                                                        style: TextStyle(
-                                                          fontSize: 14,
-                                                          color: const Color
-                                                              .fromARGB(
-                                                              186, 255, 255,
-                                                              255),
-                                                        ),
-                                                      ),
-                                                      Text(
-                                                        "66%",
-                                                        style: TextStyle(
-                                                            fontSize: 18,
-                                                            color: Colors
-                                                                .white),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  const SizedBox(
-                                                    height: 8,
-                                                  ),
-                                                  Container(
-                                                    width:
-                                                    (MediaQuery
-                                                        .of(context)
-                                                        .size
-                                                        .width * 66) / 100,
-                                                    height: 18,
-                                                    decoration: BoxDecoration(
-                                                      color:
-                                                      Color.fromARGB(
-                                                          255, 186, 131, 222),
-                                                      borderRadius: BorderRadius
-                                                          .circular(
-                                                        8.0,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          const SizedBox(
-                                            height: 20,
-                                          ),
-                                          Row(
-                                            mainAxisAlignment: MainAxisAlignment
-                                                .spaceBetween,
-                                            crossAxisAlignment: CrossAxisAlignment
-                                                .center,
-                                            children: [
-                                              Text(
-                                                "Vos tâches pour aujourdhui",
-                                                style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 18,
-                                                ),
-                                              ),
-                                              GestureDetector(
-                                                onTap: () {
-                                                  Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                        builder: (context) =>
-                                                        const TasksList(),
-                                                      ));
-                                                },
-                                                child: const Text(
-                                                  "Voir toutes",
-                                                  style: TextStyle(
-                                                    color: Color.fromARGB(
-                                                        255, 186, 131, 222),
-                                                    fontSize: 18,
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          const SizedBox(
-                                            height: 15,
-                                          ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(12.0),
-                                    child: Column(
-                                      children: [
-                                        const SizedBox(height: 12),
-                                        Slidable(
-                                          key: const ValueKey(0),
-                                          endActionPane: ActionPane(
-                                            motion: const ScrollMotion(),
-                                            children: [
-                                              SlidableAction(
-                                                onPressed: (context) {
-                                                  Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          Detail(task: value.tasks[index]),
-                                                    ),
-                                                  );
-                                                },
-                                                backgroundColor: const Color(0xFF21B7CA),
-                                                foregroundColor: Colors.white,
-                                                icon: Icons.info_outline,
-                                                label: 'Detail',
-                                              ),
-                                              SlidableAction(
-                                                onPressed: (context) {
-                                                  Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          EditTask(task: value.tasks[index]),
-                                                    ),
-                                                  );
-                                                },
-                                                backgroundColor: const Color(0xFF0392CF),
-                                                foregroundColor: Colors.white,
-                                                icon: Icons.edit,
-                                                label: 'Modifier',
-                                              ),
-                                              SlidableAction(
-                                                onPressed: (context) {
-                                                  Provider.of<TaskService>(context, listen: false)
-                                                      .deleteTask(value.tasks[index].taskId);
-                                                  // Afficher une notification ou un toast
-                                                },
-                                                backgroundColor: const Color(0xFFFE4A49),
-                                                foregroundColor: Colors.white,
-                                                icon: Icons.delete,
-                                                label: 'Supprimer',
-                                              ),
-                                            ],
-                                          ),
-                                          child: Row(
-                                            children: [
-                                              Checkbox(
-                                                value: value.tasks[index].completed,
-                                                onChanged: (bool? newValue) {
-                                                  Provider.of<TaskService>(context, listen: false)
-                                                      .updateTask(
-                                                    value.tasks[index].copyWith(
-                                                      completed: newValue ?? false,
-                                                    ),
-                                                  );
-                                                },
-                                              ),
-                                              Expanded(
-                                                child: MiniCard(
-                                                  title: "${value.tasks[index].taskTitle}",
-                                                  subtitle:
-                                                  '${value.tasks[index].taskStartDate!.day} - ${value.tasks[index].taskStartDate!.month} - ${value.tasks[index].taskStartDate!.year}',
-                                                  select: true,
-                                                  sideColor: value.tasks[index].completed
-                                                      ? Colors.green
-                                                      : Colors
-                                                      .yellowAccent, // Passage de la couleur sideColor
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ],
-                                    ),
+                          ),
+                          Text(
+                            "Bienvenue dans l'application",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                              fontWeight: FontWeight.normal,
+                            ),
+                          ),
+                        ],
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          _scaffoldKey.currentState?.openDrawer();
+                        },
+                        child: Container(
+                          padding: EdgeInsets.all(12),
+                          decoration: BoxDecoration(
+                            color: Color.fromARGB(255, 186, 131, 222),
+                            borderRadius: BorderRadius.circular(
+                              8,
+                            ),
+                          ),
+                          child: Icon(
+                            Icons.menu_open_sharp,
+                            size: 30,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Row(
+                    children: [
+                      Container(
+                        width: MediaQuery.of(context).size.width - 40,
+                        decoration: BoxDecoration(
+                          color: Color.fromARGB(255, 30, 30, 30),
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(12.0),
+                          ),
+                          border: Border.all(
+                            width: 1.0,
+                            color: Color.fromARGB(255, 30, 30, 30),
+                          ),
+                        ),
+                        child: Row(
+                          children: [
+                            const Padding(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 8.0,
+                                vertical: 15.0,
+                              ),
+                              child: Icon(
+                                Icons.search,
+                                color: Colors.white,
+                                size: 30,
+                              ),
+                            ),
+                            Expanded(
+                              child: TextFormField(
+                                initialValue: null,
+                                decoration: const InputDecoration.collapsed(
+                                  filled: true,
+                                  fillColor: Color.fromARGB(255, 30, 30, 30),
+                                  hoverColor: Colors.transparent,
+                                  hintText: "Rechercher vos tâches",
+                                  hintStyle: TextStyle(
+                                    color: Colors.white,
                                   ),
-
-                                          const SizedBox(
-                                            height: 15,
-                                          ),
-
-                                          const SizedBox(
-                                            height: 20,
-                                          ),
-
-                                          const SizedBox(
-                                            height: 15,
-                                          ),
-                                        ],
-                                      ),
-                                    ],
+                                ),
+                                onFieldSubmitted: (value) {},
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Container(
+                    width: double.infinity,
+                    // decoration: BoxDecoration(color:Colors.deepPurple,),
+                    height: MediaQuery.of(context).size.height - 200,
+                    child: ListView(
+                      scrollDirection: Axis.vertical,
+                      children: [
+                        Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "Progression",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 18,
+                                  ),
+                                ),
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                          const TasksList(),
+                                        ));
+                                  },
+                                  child: const Text(
+                                    "Voir toutes",
+                                    style: TextStyle(
+                                      color: Color.fromARGB(255, 186, 131, 222),
+                                      fontSize: 18,
+                                    ),
                                   ),
                                 ),
                               ],
                             ),
-                          ),
-                        ),
-                      ),
-                    );
+                            const SizedBox(
+                              height: 15,
+                            ),
+                            Container(
+                              decoration: BoxDecoration(
+                                  color: Color.fromARGB(255, 24, 24, 24),
+                                  borderRadius: BorderRadius.circular(8.0)),
+                              child: Padding(
+                                padding: EdgeInsets.all(10.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "Daily task",
+                                      style: TextStyle(
+                                          fontSize: 18, color: Colors.white),
+                                    ),
+                                    Text(
+                                      "2/3 task completed",
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        color: const Color.fromARGB(
+                                            186, 255, 255, 255),
+                                      ),
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment:
+                                      CrossAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          "You are almost done go ahead",
+                                          style: TextStyle(
+                                            fontSize: 14,
+                                            color: const Color.fromARGB(
+                                                186, 255, 255, 255),
+                                          ),
+                                        ),
+                                        Text(
+                                          "66%",
+                                          style: TextStyle(
+                                              fontSize: 18,
+                                              color: Colors.white),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 8,
+                                    ),
+                                    Container(
+                                      width:
+                                      (MediaQuery.of(context).size.width *
+                                          66) /
+                                          100,
+                                      height: 18,
+                                      decoration: BoxDecoration(
+                                        color:
+                                        Color.fromARGB(255, 186, 131, 222),
+                                        borderRadius: BorderRadius.circular(
+                                          8.0,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "Vos tâches pour aujourdhui",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 18,
+                                  ),
+                                ),
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                          const TasksList(),
+                                        ));
+                                  },
+                                  child: const Text(
+                                    "Voir toutes",
+                                    style: TextStyle(
+                                      color: Color.fromARGB(255, 186, 131, 222),
+                                      fontSize: 18,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 15,
+                            ),
 
-                  }
-              );
-            }
+                           Column(
+                             children: [
+                               Consumer<TaskService>(
+                                 builder: (context, value, child) {
+                                   return ListView.builder(
+                                     shrinkWrap: true,
+                                     itemCount: value.tasks.length,
+                                     itemBuilder: (context, index) {
+                                       return Padding(
+                                         padding: const EdgeInsets.all(12.0),
+                                         child: Column(
+                                           children: [
+                                             const SizedBox(height: 12),
+                                             Slidable(
+                                               key: const ValueKey(0),
+                                               endActionPane: ActionPane(
+                                                 motion: const ScrollMotion(),
+                                                 children: [
+                                                   SlidableAction(
+                                                     onPressed: (context) {
+                                                       Navigator.push(
+                                                         context,
+                                                         MaterialPageRoute(
+                                                           builder: (context) =>
+                                                               Detail(task: value.tasks[index]),
+                                                         ),
+                                                       );
+                                                     },
+                                                     backgroundColor: const Color(0xFF21B7CA),
+                                                     foregroundColor: Colors.white,
+                                                     icon: Icons.info_outline,
+                                                     label: 'Detail',
+                                                   ),
+                                                   SlidableAction(
+                                                     onPressed: (context) {
+                                                       Navigator.push(
+                                                         context,
+                                                         MaterialPageRoute(
+                                                           builder: (context) =>
+                                                               EditTask(task: value.tasks[index]),
+                                                         ),
+                                                       );
+                                                     },
+                                                     backgroundColor: const Color(0xFF0392CF),
+                                                     foregroundColor: Colors.white,
+                                                     icon: Icons.edit,
+                                                     label: 'Modifier',
+                                                   ),
+                                                   SlidableAction(
+                                                     onPressed: (context) {
+                                                       Provider.of<TaskService>(context, listen: false)
+                                                           .deleteTask(value.tasks[index].taskId);
+                                                       // Afficher une notification ou un toast
+                                                     },
+                                                     backgroundColor: const Color(0xFFFE4A49),
+                                                     foregroundColor: Colors.white,
+                                                     icon: Icons.delete,
+                                                     label: 'Supprimer',
+                                                   ),
+                                                 ],
+                                               ),
+                                               child: Row(
+                                                 children: [
+                                                   Checkbox(
+                                                     value: value.tasks[index].completed,
+                                                     onChanged: (bool? newValue) {
+                                                       Provider.of<TaskService>(context, listen: false)
+                                                           .updateTask(
+                                                         value.tasks[index].copyWith(
+                                                           completed: newValue ?? false,
+                                                         ),
+                                                       );
+                                                     },
+                                                   ),
+                                                   Expanded(
+                                                     child: MiniCard(
+                                                       title: "${value.tasks[index].taskTitle}",
+                                                       subtitle:
+                                                       '${value.tasks[index].taskStartDate!.day} - ${value.tasks[index].taskStartDate!.month} - ${value.tasks[index].taskStartDate!.year}',
+                                                       select: true,
+                                                       sideColor: value.tasks[index].completed
+                                                           ? Colors.green
+                                                           : Colors
+                                                           .yellowAccent, // Passage de la couleur sideColor
+                                                     ),
+                                                   ),
+                                                 ],
+                                               ),
+                                             ),
+                                           ],
+                                         ),
+                                       );
+                                     },
+                                   );
+                                 },
+                               ),
+                           ]
+                             ,)
+
+,
+
+                            const SizedBox(
+                              height: 15,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
+          ),
+        ),
+      ),
       drawer: Drawer(
         child: Container(
           decoration: BoxDecoration(

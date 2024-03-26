@@ -12,6 +12,7 @@ class TaskService with ChangeNotifier {
       'description': task.taskDescription,
       'start_date': task.taskStartDate,
       'end_date': task.taskEndDate,
+      'completed':task.completed,
     }).then((value) {
       task.taskId = value.id;
       tasks.add(task);
