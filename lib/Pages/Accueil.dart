@@ -246,7 +246,7 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
                               ],
                             ),
                             const SizedBox(
-                              height: 15,
+                              height: 8,
                             ),
                             Container(
                               decoration: BoxDecoration(
@@ -346,9 +346,7 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
                                 ),
                               ],
                             ),
-                            const SizedBox(
-                              height: 15,
-                            ),
+
 
                            Column(
                              children: [
@@ -356,13 +354,13 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
                                  builder: (context, value, child) {
                                    return ListView.builder(
                                      shrinkWrap: true,
-                                     itemCount: value.tasks.length,
+                                     itemCount: 3,
                                      itemBuilder: (context, index) {
                                        return Padding(
                                          padding: const EdgeInsets.all(12.0),
                                          child: Column(
                                            children: [
-                                             const SizedBox(height: 12),
+
                                              Slidable(
                                                key: const ValueKey(0),
                                                endActionPane: ActionPane(
