@@ -456,6 +456,8 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.8"
+<<<<<<< HEAD
+=======
   provider:
     dependency: transitive
     description:
@@ -472,6 +474,7 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.3.1"
+>>>>>>> f106d143d60de215c67e666d90ac514df0375a35
   rxdart:
     dependency: transitive
     description:
