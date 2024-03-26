@@ -45,7 +45,6 @@ class _MiniCardState extends State<MiniCard> {
     });
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Stack(
