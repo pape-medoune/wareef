@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:wareef/Pages/tasks_list.dart';
 import 'package:wareef/components/MiniCard.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+
 class Accueil extends StatefulWidget {
   const Accueil({Key? key}) : super(key: key);
 
@@ -222,23 +223,22 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
                                   ),
                                 ),
                                 GestureDetector(
-                                      onTap: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const TasksList(),
-                                            ));
-                                      },
-                                      child: const Text(
-                                        "Voir toutes",
-                                        style: TextStyle(
-                                          color: Color.fromARGB(
-                                              255, 186, 131, 222),
-                                          fontSize: 18,
-                                        ),
-                                      ),
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              const TasksList(),
+                                        ));
+                                  },
+                                  child: const Text(
+                                    "Voir toutes",
+                                    style: TextStyle(
+                                      color: Color.fromARGB(255, 186, 131, 222),
+                                      fontSize: 18,
                                     ),
+                                  ),
+                                ),
                               ],
                             ),
                             const SizedBox(
@@ -324,23 +324,22 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
                                   ),
                                 ),
                                 GestureDetector(
-                                      onTap: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const TasksList(),
-                                            ));
-                                      },
-                                      child: const Text(
-                                        "Voir toutes",
-                                        style: TextStyle(
-                                          color: Color.fromARGB(
-                                              255, 186, 131, 222),
-                                          fontSize: 18,
-                                        ),
-                                      ),
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              const TasksList(),
+                                        ));
+                                  },
+                                  child: const Text(
+                                    "Voir toutes",
+                                    style: TextStyle(
+                                      color: Color.fromARGB(255, 186, 131, 222),
+                                      fontSize: 18,
                                     ),
+                                  ),
+                                ),
                               ],
                             ),
                             const SizedBox(
@@ -349,60 +348,63 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
                             Column(
                               children: [
                                 Slidable(
-                                    // Specify a key if the Slidable is dismissible.
-                                    key: const ValueKey(0),
+                                  // Specify a key if the Slidable is dismissible.
+                                  key: const ValueKey(0),
 
-                                    // The start action pane is the one at the left or the top side.
-                                    // startActionPane: ActionPane(
-                                    //   // A motion is a widget used to control how the pane animates.
-                                    //   motion: const ScrollMotion(),
+                                  // The start action pane is the one at the left or the top side.
+                                  // startActionPane: ActionPane(
+                                  //   // A motion is a widget used to control how the pane animates.
+                                  //   motion: const ScrollMotion(),
 
-                                    //   // A pane can dismiss the Slidable.
-                                    //   dismissible:
-                                    //       DismissiblePane(onDismissed: () {}),
+                                  //   // A pane can dismiss the Slidable.
+                                  //   dismissible:
+                                  //       DismissiblePane(onDismissed: () {}),
 
-                                    //   // All actions are defined in the children parameter.
-                                    //   children: [
-                                    //     // A SlidableAction can have an icon and/or a label.
+                                  //   // All actions are defined in the children parameter.
+                                  //   children: [
+                                  //     // A SlidableAction can have an icon and/or a label.
 
-                                    //   ],
-                                    // ),
+                                  //   ],
+                                  // ),
 
-                                    // The end action pane is the one at the right or the bottom side.
-                                    endActionPane: ActionPane(
-                                      motion: const ScrollMotion(),
-                                      children: [
-                                        SlidableAction(
-                                          onPressed: (BuildContext context) {},
-                                          backgroundColor: Color(0xFF21B7CA),
-                                          foregroundColor: Colors.white,
-                                          icon: Icons.remove_red_eye,
-                                          label: 'Detail',
-                                        ),
-                                        SlidableAction(
-                                          onPressed: (_) => controller.close(),
-                                          backgroundColor:
-                                              const Color(0xFF0392CF),
-                                          foregroundColor: Colors.white,
-                                          icon: Icons.edit,
-                                          label: 'Modifier',
-                                        ),
-                                        SlidableAction(
-                                          onPressed: (BuildContext context) {},
-                                          backgroundColor: Color(0xFFFE4A49),
-                                          foregroundColor: Colors.white,
-                                          icon: Icons.delete,
-                                          label: 'Supprimer',
-                                        ),
-                                      ],
-                                    ),
+                                  // The end action pane is the one at the right or the bottom side.
+                                  endActionPane: ActionPane(
+                                    motion: const ScrollMotion(),
+                                    children: [
+                                      SlidableAction(
+                                        onPressed: (BuildContext context) {},
+                                        backgroundColor: Color(0xFF21B7CA),
+                                        foregroundColor: Colors.white,
+                                        icon: Icons.remove_red_eye,
+                                        label: 'Detail',
+                                      ),
+                                      SlidableAction(
+                                        onPressed: (_) => controller.close(),
+                                        backgroundColor:
+                                            const Color(0xFF0392CF),
+                                        foregroundColor: Colors.white,
+                                        icon: Icons.edit,
+                                        label: 'Modifier',
+                                      ),
+                                      SlidableAction(
+                                        onPressed: (BuildContext context) {},
+                                        backgroundColor: Color(0xFFFE4A49),
+                                        foregroundColor: Colors.white,
+                                        icon: Icons.delete,
+                                        label: 'Supprimer',
+                                      ),
+                                    ],
+                                  ),
 
-                                    // The child of the Slidable is what the user sees when the
-                                    // component is not dragged.
-                                    child: MiniCard(
-                                        title: "Examen ",
-                                        subtitle: "15 Mai",
-                                        select: true)),
+                                  // The child of the Slidable is what the user sees when the
+                                  // component is not dragged.
+                                  child: MiniCard(
+                                    title: "Examen ",
+                                    subtitle: "15 Mai",
+                                    select: true,
+                                    sideColor: Colors.deepPurple,
+                                  ),
+                                ),
                               ],
                             ),
                             const SizedBox(
@@ -414,6 +416,7 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
                                   title: "Devoir ",
                                   subtitle: "5 Mai",
                                   select: false,
+                                  sideColor: Colors.deepPurple
                                 ),
                                 const SizedBox(
                                   height: 15,
@@ -422,6 +425,7 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
                                   title: "Apprendre Leçon ",
                                   subtitle: "17 Mars",
                                   select: true,
+                                  sideColor: Colors.deepPurple
                                 ),
                               ],
                             ),
@@ -440,23 +444,22 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
                                   ),
                                 ),
                                 GestureDetector(
-                                      onTap: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const TasksList(),
-                                            ));
-                                      },
-                                      child: const Text(
-                                        "Voir toutes",
-                                        style: TextStyle(
-                                          color: Color.fromARGB(
-                                              255, 186, 131, 222),
-                                          fontSize: 18,
-                                        ),
-                                      ),
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              const TasksList(),
+                                        ));
+                                  },
+                                  child: const Text(
+                                    "Voir toutes",
+                                    style: TextStyle(
+                                      color: Color.fromARGB(255, 186, 131, 222),
+                                      fontSize: 18,
                                     ),
+                                  ),
+                                ),
                               ],
                             ),
                             const SizedBox(
@@ -529,7 +532,7 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
               Container(
                 // decoration: BoxDecoration(color:Colors.deepPurple),
                 width: double.infinity,
-                height: MediaQuery.of(context).size.height /1.65,
+                height: MediaQuery.of(context).size.height / 1.65,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
