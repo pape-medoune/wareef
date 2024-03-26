@@ -49,6 +49,7 @@ dependencies:
   crystal_navigation_bar: ^1.0.0
   motion_toast: ^2.8.0
   random_string: ^2.3.1
+  provider: ^6.1.2
 
 dev_dependencies:
   flutter_test:

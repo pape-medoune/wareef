@@ -129,14 +129,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.6"
-  easy_date_timeline:
-    dependency: "direct main"
-    description:
-      name: easy_date_timeline
-      sha256: "136421614a27f6807fd23a2991b31c953de60ef287496bb7db4879bed62a3b7a"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.6"
   fake_async:
     dependency: transitive
     description:
@@ -456,10 +448,8 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.8"
-<<<<<<< HEAD
-=======
   provider:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: provider
       sha256: c8a055ee5ce3fd98d6fc872478b03823ffdb448699c6ebdbbc71d59b596fd48c
@@ -474,7 +464,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.3.1"
->>>>>>> f106d143d60de215c67e666d90ac514df0375a35
   rxdart:
     dependency: transitive
     description:

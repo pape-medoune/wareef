@@ -1,9 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:wareef/Pages/OnBoardingIntro.dart'; 
-import 'package:wareef/Pages/tasks_list.dart';
-import 'package:wareef/auth/login.dart'; 
+import 'package:wareef/Pages/OnBoardingIntro.dart';
 import 'package:wareef/core.dart';
 import 'package:wareef/services/task_service.dart';
 

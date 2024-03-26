@@ -1,16 +1,11 @@
-
-import 'package:flutter/cupertino.dart';
+import 'package:crystal_navigation_bar/crystal_navigation_bar.dart';
 import 'package:flutter/material.dart';
-
 import 'package:wareef/Pages/Accueil.dart';
 import 'package:wareef/Pages/addTask.dart';
-
-
-import 'package:crystal_navigation_bar/crystal_navigation_bar.dart';
 import 'package:wareef/Pages/tasks_list.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({super.key});
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -18,15 +13,17 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
- List <Widget> _screen = [
-    Accueil(),
-    AddTask(),
-    TasksList(),
-];int _selectedIndex = 0;
+  final List<Widget> _screen = [
+    const Accueil(),
+    const AddTask(),
+    const TasksList(),
+  ];
+  int _selectedIndex = 0;
+  @override
   Widget build(BuildContext context) {
-    return Scaffold( 
+    return Scaffold(
       body: _screen[_selectedIndex],
-     // floatingActionButton: FloatingActionButton(
+      // floatingActionButton: FloatingActionButton(
       //   onPressed: () {},
       //   shape: RoundedRectangleBorder(
       //     borderRadius: BorderRadius.circular(
@@ -77,5 +74,4 @@ class _HomePageState extends State<HomePage>
       ),
     );
   }
-
- }
+}

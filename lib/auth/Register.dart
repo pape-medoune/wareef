@@ -1,8 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:wareef/auth/AuthService.dart';
-import 'package:wareef/core.dart';
+import 'package:flutter/material.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 
@@ -20,8 +18,6 @@ final FirebaseAuth _auth = FirebaseAuth.instance;
 //   }
 // }
 
-
-
 // Future<UserCredential?> signInWithEmailAndPassword(String email, String password) async {
 //   try {
 //     UserCredential userCredential = await _auth.signInWithEmailAndPassword(
@@ -35,102 +31,99 @@ final FirebaseAuth _auth = FirebaseAuth.instance;
 //   }
 // }
 class Register extends StatefulWidget {
-  const Register({Key? key}) : super(key: key);
+  const Register({super.key});
 
   @override
   _RegisterState createState() => _RegisterState();
 }
 
-
-
 class _RegisterState extends State<Register> {
   final TextEditingController _nomController = TextEditingController();
-final TextEditingController _prenomController = TextEditingController();
-final TextEditingController _emailController = TextEditingController();
-final TextEditingController _passwordController = TextEditingController();
-final TextEditingController _confirmPasswordController = TextEditingController();
-@override
-void dispose()
-{
-  _nomController.dispose();
-  _prenomController.dispose();
-  _emailController.dispose();
-  _passwordController.dispose();
-  _confirmPasswordController.dispose();
-  super.dispose();
-}
+  final TextEditingController _prenomController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
+  @override
+  void dispose() {
+    _nomController.dispose();
+    _prenomController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    _confirmPasswordController.dispose();
+    super.dispose();
+  }
 
-bool _isLoading =false;
-Future signUp() async {
- try {
-  setState(() {
+  bool _isLoading = false;
+  Future signUp() async {
+    try {
+      setState(() {
         _isLoading = true; // Mettre à jour l'état de chargement
       });
-    UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
-      email: _emailController.text.trim(),
-      password: _passwordController.text.trim(),
-    ); 
-    await addUserDetails(
-      _prenomController.text.trim(),
-      _nomController.text.trim(),
-      _emailController.text.trim(),
-      userCredential.user!.uid, 
-    );
-    
-    
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Inscription réussie'),
-          content: Text('Vous êtes maintenant inscrit.'),
-          actions: <Widget>[
-            TextButton(
-              child: Text('OK'),
-              onPressed: () {
-                Navigator.of(context).pop();  
-              },
-            ),
-          ],
-        );
-      },
-    );
- } catch (e) {
-     
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Erreur lors de l\'inscription'),
-          content: Text('Veuillez vérifier vos informations et réessayer.'),
-          actions: <Widget>[
-            TextButton(
-              child: Text('OK'),
-              onPressed: () {
-                Navigator.of(context).pop();  
-              },
-            ),
-          ],
-        );
-      },
-    );
- }finally {
+      UserCredential userCredential =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: _emailController.text.trim(),
+        password: _passwordController.text.trim(),
+      );
+      await addUserDetails(
+        _prenomController.text.trim(),
+        _nomController.text.trim(),
+        _emailController.text.trim(),
+        userCredential.user!.uid,
+      );
+
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('Inscription réussie'),
+            content: const Text('Vous êtes maintenant inscrit.'),
+            actions: <Widget>[
+              TextButton(
+                child: const Text('OK'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    } catch (e) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('Erreur lors de l\'inscription'),
+            content:
+                const Text('Veuillez vérifier vos informations et réessayer.'),
+            actions: <Widget>[
+              TextButton(
+                child: const Text('OK'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    } finally {
       setState(() {
         _isLoading = false; // Mettre à jour l'état de chargement
       });
     }
-}
+  }
 
-
-Future addUserDetails(String prenom, String nom, String email, String uid_person) async {
-  await FirebaseFirestore.instance.collection('users').add({
-    'uid': uid_person,
-    'prenom': prenom,
-    'nom': nom,
-    'email': email,
-
-  });
-}
+  Future addUserDetails(
+      String prenom, String nom, String email, String uidPerson) async {
+    await FirebaseFirestore.instance.collection('users').add({
+      'uid': uidPerson,
+      'prenom': prenom,
+      'nom': nom,
+      'email': email,
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -138,7 +131,7 @@ Future addUserDetails(String prenom, String nom, String email, String uid_person
       body: SafeArea(
         child: SingleChildScrollView(
           child: Container(
-            padding: EdgeInsets.symmetric(
+            padding: const EdgeInsets.symmetric(
               horizontal: 15,
             ),
             width: MediaQuery.of(context).size.width,
@@ -147,7 +140,7 @@ Future addUserDetails(String prenom, String nom, String email, String uid_person
                 const SizedBox(
                   height: 80,
                 ),
-                Text(
+                const Text(
                   "WAREËF",
                   style: TextStyle(
                     color: Colors.white,
@@ -157,7 +150,7 @@ Future addUserDetails(String prenom, String nom, String email, String uid_person
                 const SizedBox(
                   height: 25,
                 ),
-                Container(
+                const SizedBox(
                   width: double.infinity,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -173,10 +166,10 @@ Future addUserDetails(String prenom, String nom, String email, String uid_person
                         "Nouveau dans l'application? Inscrivez vous !",
                         style: TextStyle(
                           fontSize: 15,
-                          color: const Color.fromARGB(148, 255, 255, 255),
+                          color: Color.fromARGB(148, 255, 255, 255),
                         ),
                       ),
-                      const SizedBox(
+                      SizedBox(
                         height: 8,
                       ),
                     ],
@@ -194,19 +187,19 @@ Future addUserDetails(String prenom, String nom, String email, String uid_person
                         // height: 60,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8),
-                          color: Color.fromARGB(255, 31, 31, 31),
+                          color: const Color.fromARGB(255, 31, 31, 31),
                         ),
-                        padding: EdgeInsets.symmetric(
+                        padding: const EdgeInsets.symmetric(
                           horizontal: 15,
                           vertical: 3,
                         ),
                         child: TextFormField(
                           controller: _nomController,
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.white,
                             fontSize: 16,
                           ),
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             contentPadding: EdgeInsets.symmetric(
                               vertical: 5,
                             ),
@@ -245,19 +238,19 @@ Future addUserDetails(String prenom, String nom, String email, String uid_person
                         // height: 60,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8),
-                          color: Color.fromARGB(255, 31, 31, 31),
+                          color: const Color.fromARGB(255, 31, 31, 31),
                         ),
-                        padding: EdgeInsets.symmetric(
+                        padding: const EdgeInsets.symmetric(
                           horizontal: 15,
                           vertical: 3,
                         ),
                         child: TextFormField(
                           controller: _prenomController,
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.white,
                             fontSize: 16,
                           ),
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             contentPadding: EdgeInsets.symmetric(
                               vertical: 5,
                             ),
@@ -296,19 +289,19 @@ Future addUserDetails(String prenom, String nom, String email, String uid_person
                         // height: 60,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8),
-                          color: Color.fromARGB(255, 31, 31, 31),
+                          color: const Color.fromARGB(255, 31, 31, 31),
                         ),
-                        padding: EdgeInsets.symmetric(
+                        padding: const EdgeInsets.symmetric(
                           horizontal: 15,
                           vertical: 3,
                         ),
                         child: TextFormField(
                           controller: _emailController,
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.white,
                             fontSize: 16,
                           ),
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             contentPadding: EdgeInsets.symmetric(
                               vertical: 5,
                             ),
@@ -347,20 +340,20 @@ Future addUserDetails(String prenom, String nom, String email, String uid_person
                         // height: 60,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8),
-                          color: Color.fromARGB(255, 31, 31, 31),
+                          color: const Color.fromARGB(255, 31, 31, 31),
                         ),
-                        padding: EdgeInsets.symmetric(
+                        padding: const EdgeInsets.symmetric(
                           horizontal: 15,
                           vertical: 3,
                         ),
                         child: TextFormField(
                           controller: _passwordController,
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.white,
                             fontSize: 16,
                           ),
                           obscureText: true,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             contentPadding: EdgeInsets.symmetric(
                               vertical: 5,
                             ),
@@ -396,19 +389,19 @@ Future addUserDetails(String prenom, String nom, String email, String uid_person
                               // height: 60,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8),
-                                color: Color.fromARGB(255, 31, 31, 31),
+                                color: const Color.fromARGB(255, 31, 31, 31),
                               ),
-                              padding: EdgeInsets.symmetric(
+                              padding: const EdgeInsets.symmetric(
                                 horizontal: 15,
                                 vertical: 3,
                               ),
                               child: TextFormField(
-                                style: TextStyle(
+                                style: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 16,
                                 ),
                                 obscureText: true,
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                   contentPadding: EdgeInsets.symmetric(
                                     vertical: 5,
                                   ),
@@ -435,7 +428,7 @@ Future addUserDetails(String prenom, String nom, String email, String uid_person
                             const SizedBox(
                               height: 15,
                             ),
-                            Container(
+                            const SizedBox(
                               width: double.infinity,
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
@@ -455,7 +448,6 @@ Future addUserDetails(String prenom, String nom, String email, String uid_person
                               height: 10,
                             ),
                             GestureDetector(
-
                               // onTap: () async {
                               //   final message =
                               //       await AuthService().registration(
@@ -477,28 +469,31 @@ Future addUserDetails(String prenom, String nom, String email, String uid_person
                               // },
                               onTap: signUp,
                               child: Container(
-                                width: !_isLoading? double.infinity : 70,
+                                width: !_isLoading ? double.infinity : 70,
                                 // height: 60,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(8),
-                                  color: Color.fromARGB(255, 2, 137, 96),
+                                  color: const Color.fromARGB(255, 2, 137, 96),
                                 ),
-                                padding: EdgeInsets.symmetric(
+                                padding: const EdgeInsets.symmetric(
                                   horizontal: 15,
                                   vertical: 16,
                                 ),
-                                child: _isLoading // Condition pour afficher le CircularProgressIndicator ou le texte
-                        ? CircularProgressIndicator(
-                            valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                          )
-                        : Text(
-                            "S'inscrire",
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.white,
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
+                                child:
+                                    _isLoading // Condition pour afficher le CircularProgressIndicator ou le texte
+                                        ? const CircularProgressIndicator(
+                                            valueColor:
+                                                AlwaysStoppedAnimation<Color>(
+                                                    Colors.white),
+                                          )
+                                        : const Text(
+                                            "S'inscrire",
+                                            style: TextStyle(
+                                              fontSize: 16,
+                                              color: Colors.white,
+                                            ),
+                                            textAlign: TextAlign.center,
+                                          ),
                               ),
                             ),
                             const SizedBox(
@@ -509,13 +504,13 @@ Future addUserDetails(String prenom, String nom, String email, String uid_person
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Container(
-                                  width: 165,
+                                  width: MediaQuery.of(context).size.width/3,
                                   height: 1,
-                                  decoration: BoxDecoration(
+                                  decoration: const BoxDecoration(
                                     color: Colors.grey,
                                   ),
                                 ),
-                                Text(
+                                const Text(
                                   "Ou",
                                   style: TextStyle(
                                     fontSize: 18,
@@ -523,9 +518,9 @@ Future addUserDetails(String prenom, String nom, String email, String uid_person
                                   ),
                                 ),
                                 Container(
-                                  width: 165,
+                                  width: MediaQuery.of(context).size.width/3,
                                   height: 1,
-                                  decoration: BoxDecoration(
+                                  decoration: const BoxDecoration(
                                     color: Colors.grey,
                                   ),
                                 ),
@@ -537,7 +532,7 @@ Future addUserDetails(String prenom, String nom, String email, String uid_person
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text(
+                                const Text(
                                   "Vous avez déjà un compte?",
                                   style: TextStyle(
                                     fontSize: 13,
@@ -551,7 +546,7 @@ Future addUserDetails(String prenom, String nom, String email, String uid_person
                                   onTap: () {
                                     Navigator.pushNamed(context, "/login");
                                   },
-                                  child: Text(
+                                  child: const Text(
                                     "S'identifier",
                                     style: TextStyle(
                                       fontSize: 13,
