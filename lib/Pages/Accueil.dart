@@ -220,7 +220,7 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 const Text(
-                                  "Progression",
+                                  "Fonctionnement de l'application",
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 18,
@@ -235,13 +235,7 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
                                               const TasksList(),
                                         ));
                                   },
-                                  child: const Text(
-                                    "Voir toutes",
-                                    style: TextStyle(
-                                      color: Color.fromARGB(255, 186, 131, 222),
-                                      fontSize: 18,
-                                    ),
-                                  ),
+                                  child: Icon(Icons.remove_red_eye_outlined,),
                                 ),
                               ],
                             ),
@@ -257,56 +251,37 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
+                                    // const Text(
+                                    //   "Fonctionnement",
+                                    //   style: TextStyle(
+                                    //       fontSize: 18, color: Colors.white),
+                                    // ),
                                     const Text(
-                                      "Daily task",
-                                      style: TextStyle(
-                                          fontSize: 18, color: Colors.white),
-                                    ),
-                                    const Text(
-                                      "2/3 task completed",
+                                      "- Glissez à droite pour voir/modifier/supprimer tâches.",
                                       style: TextStyle(
                                         fontSize: 16,
                                         color:
                                             Color.fromARGB(186, 255, 255, 255),
                                       ),
                                     ),
-                                    const Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          "You are almost done go ahead",
-                                          style: TextStyle(
-                                            fontSize: 14,
-                                            color: Color.fromARGB(
-                                                186, 255, 255, 255),
-                                          ),
-                                        ),
-                                        Text(
-                                          "66%",
-                                          style: TextStyle(
-                                              fontSize: 18,
-                                              color: Colors.white),
-                                        ),
-                                      ],
-                                    ),
+                                   
                                     const SizedBox(
                                       height: 8,
                                     ),
-                                    Container(
-                                      width:
-                                          (MediaQuery.of(context).size.width *
-                                                  66) /
-                                              100,
-                                      height: 18,
-                                      decoration: BoxDecoration(
-                                        color: const Color.fromARGB(
-                                            255, 186, 131, 222),
-                                        borderRadius: BorderRadius.circular(
-                                          8.0,
-                                        ),
+                                    const Text(
+                                      "- Cliquez sur l'icône 'Démarrer' pour lancer une tâche.",
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        color:
+                                            Color.fromARGB(186, 255, 255, 255),
+                                      ),
+                                    ),
+                                    const Text(
+                                      "- Cochez pour marquer une tâche comme terminée.",
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        color:
+                                            Color.fromARGB(186, 255, 255, 255),
                                       ),
                                     ),
                                   ],
