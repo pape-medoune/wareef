@@ -9,7 +9,7 @@ import 'package:wareef/components/MiniCard.dart';
 import '../services/task_service.dart';
 import 'Detail.dart';
 import 'editTask.dart';
-
+//la page d'accueil
 class Accueil extends StatefulWidget {
   const Accueil({super.key});
 
