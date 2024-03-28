@@ -226,17 +226,7 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
                                     fontSize: 18,
                                   ),
                                 ),
-                                GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              const TasksList(),
-                                        ));
-                                  },
-                                  child: Icon(Icons.remove_red_eye_outlined,),
-                                ),
+                                
                               ],
                             ),
                             const SizedBox(
@@ -259,19 +249,16 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
                                     const Text(
                                       "- Glissez à droite pour voir/modifier/supprimer tâches.",
                                       style: TextStyle(
-                                        fontSize: 16,
+                                        fontSize: 15,
                                         color:
                                             Color.fromARGB(186, 255, 255, 255),
                                       ),
                                     ),
-                                   
-                                    const SizedBox(
-                                      height: 8,
-                                    ),
+                                    
                                     const Text(
                                       "- Cliquez sur l'icône 'Démarrer' pour lancer une tâche.",
                                       style: TextStyle(
-                                        fontSize: 16,
+                                        fontSize: 15,
                                         color:
                                             Color.fromARGB(186, 255, 255, 255),
                                       ),
@@ -279,7 +266,7 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
                                     const Text(
                                       "- Cochez pour marquer une tâche comme terminée.",
                                       style: TextStyle(
-                                        fontSize: 16,
+                                        fontSize: 15,
                                         color:
                                             Color.fromARGB(186, 255, 255, 255),
                                       ),
@@ -337,7 +324,7 @@ class _AccueilState extends State<Accueil> with SingleTickerProviderStateMixin {
                                          padding: const EdgeInsets.all(12.0),
                                          child: Column(
                                            children: [
-                                             const SizedBox(height: 12),
+                                             const SizedBox(height: 2),
                                              Slidable(
                                                key: const ValueKey(0),
                                                endActionPane: ActionPane(
