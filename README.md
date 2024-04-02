@@ -1,16 +1,17 @@
 # wareef
-
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+APPLICATION DE GESTION DES TACHES
+![15](https://github.com/pape-medoune/wareef/assets/80828135/30d47bde-45f3-45a9-9f66-95864621ff2a)
+![14](https://github.com/pape-medoune/wareef/assets/80828135/6b4e166a-280a-42a0-95e9-8f31e4c56512)
+![13](https://github.com/pape-medoune/wareef/assets/80828135/257c6a02-0f74-4770-bb97-9618f4195f50)
+![12](https://github.com/pape-medoune/wareef/assets/80828135/26e23179-7fa0-4ab3-97cf-835451d391a8)
+![11](https://github.com/pape-medoune/wareef/assets/80828135/b8939e48-0ce2-4da0-9301-4fd9f4abfd84)
+![10](https://github.com/pape-medoune/wareef/assets/80828135/9d292ebe-2b25-4ba8-978c-fcb68691131c)
+![9](https://github.com/pape-medoune/wareef/assets/80828135/8e8921bd-9d9c-4f84-94df-7f27c84a8c31)
+![8](https://github.com/pape-medoune/wareef/assets/80828135/c43df628-9d13-42a5-b23b-35e1110ff1c7)
+![7](https://github.com/pape-medoune/wareef/assets/80828135/f9b2c0cf-316d-4255-8083-14335ab088fe)
+![6](https://github.com/pape-medoune/wareef/assets/80828135/1e89c65d-1349-4931-a36c-1dacba8bafac)
+![5](https://github.com/pape-medoune/wareef/assets/80828135/1dc93d1f-f424-4139-8f25-9a5d4cf8a145)
+![4](https://github.com/pape-medoune/wareef/assets/80828135/3d38ea0a-c7da-470c-ba3a-fd3d4239212b)
+![3](https://github.com/pape-medoune/wareef/assets/80828135/b0f1638d-85b3-4f7b-be9c-b4e611c14361)
+![2](https://github.com/pape-medoune/wareef/assets/80828135/c1510b4b-bdb2-4f0a-b4aa-92d4b83aeb3b)
+![1](https://github.com/pape-medoune/wareef/assets/80828135/46f6ebf2-0b7e-48af-a2e3-1fb8b87a8a5d)
