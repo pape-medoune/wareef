@@ -1,7 +1,7 @@
 # wareef 
 APPLICATION DE GESTION DES TACHES
 
-<img src="https://github.com/pape-medoune/wareef/blob/main/assets/80828135/30d47bde-45f3-45a9-9f66-95864621ff2a" width="400px" height="250px">
+<img src="https://github.com/pape-medoune/wareef/assets/80828135/30d47bde-45f3-45a9-9f66-95864621ff2a" width="400px" height="250px">
 <img src="https://github.com/pape-medoune/wareef/blob/main/assets/80828135/6b4e166a-280a-42a0-95e9-8f31e4c56512" width="400px" height="250px">
 <img src="https://github.com/pape-medoune/wareef/blob/main/assets/80828135/257c6a02-0f74-4770-bb97-9618f4195f50" width="400px" height="250px">
 <img src="https://github.com/pape-medoune/wareef/blob/main/assets/80828135/26e23179-7fa0-4ab3-97cf-835451d391a8" width="400px" height="250px">
