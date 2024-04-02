@@ -1,7 +1,7 @@
 # wareef
 
 <h1 style="text-align:center;">APPLICATION DE GESTION DES TACHES</h1>
-<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));">
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); width: 100%;grid-gap: 20px;">
   
 <img src="https://github.com/pape-medoune/wareef/assets/80828135/46f6ebf2-0b7e-48af-a2e3-1fb8b87a8a5d" style="width:250px; height:400px; object-fit:cover;">
 <img src="https://github.com/pape-medoune/wareef/assets/80828135/c1510b4b-bdb2-4f0a-b4aa-92d4b83aeb3b" style="width:250px; height:400px; object-fit:cover;">
